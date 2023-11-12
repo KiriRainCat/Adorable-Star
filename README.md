@@ -1,6 +1,8 @@
-# Adorable Star (adorable-star)
+# 萌媛星 Adorable Star (adorable-star)
 
 Frontend of Adorable Star (Customized version of Jupiter Ed by KiriRainCat)
+
+萌媛星的网页前端 (Jupiter Ed - 柒夜雨猫定制版)
 
 ## Install the dependencies
 
