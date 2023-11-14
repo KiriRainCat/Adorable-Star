@@ -10,7 +10,7 @@
 
         <q-btn-dropdown dropdown-icon="language" auto-close>
           <div v-for="lang in langs" :key="lang[0]">
-            <q-btn flat noCaps class="w-full" @click="changeLocale(lang[1])">{{ lang[0] }}</q-btn>
+            <q-btn flat noCaps class="w-full" @click="changeLocale($i18n, lang[1])">{{ lang[0] }}</q-btn>
           </div>
         </q-btn-dropdown>
       </q-toolbar>
@@ -25,7 +25,11 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </q-page-container>
   </q-layout>
 </template>
@@ -33,9 +37,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
-import { useI18n } from 'vue-i18n';
-
-const i18n = useI18n();
+import { changeLocale, langs } from 'src/i18n';
 
 const essentialLinks: EssentialLinkProps[] = [
   {
@@ -82,20 +84,21 @@ const essentialLinks: EssentialLinkProps[] = [
   },
 ];
 
-const langs = [
-  ['中文', 'zh-CN'],
-  ['English', 'en-US'],
-  ['한국어', 'ko-KR'],
-];
-
-const changeLocale = (locale: string) => {
-  i18n.locale.value = locale;
-  localStorage.setItem('locale', locale);
-};
-
 const leftDrawerOpen = ref(false);
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 </script>
+
+<style scoped lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
