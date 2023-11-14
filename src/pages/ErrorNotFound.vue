@@ -1,13 +1,11 @@
 <template>
-  <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
+  <div class="h-screen bg-[rgb(33,150,243)] text-white text-center flex justify-center items-center">
     <div>
-      <div style="font-size: 30vh">404</div>
+      <div class="text-[30vh]">404</div>
 
-      <div class="text-h2" style="opacity: 0.4">Oops. Nothing here...</div>
+      <div class="text-2xl opacity-40">{{ $t('pageNotFound') }}</div>
 
-      <q-btn class="q-mt-xl" color="white" text-color="blue" unelevated to="/" label="Go Home" no-caps />
+      <q-btn class="mt-10 text-blue bg-white" unelevated no-caps to="/" :label="$t('backToHome')" />
     </div>
   </div>
 </template>
-
-<script setup lang="ts"></script>
