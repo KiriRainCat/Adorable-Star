@@ -1,16 +1,22 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="hHh LpR fFf">
+    <q-header elevated class="bg-primary text-white h-14 flex">
       <q-toolbar>
-        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
+        <q-btn size="medium" dense flat round icon="menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-toolbar-title>
+          <span class="ml-2 text-[1.2rem] font-semibold">萌媛星</span>
+        </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn-dropdown dropdown-icon="language" auto-close>
+          <div v-for="lang in langs" :key="lang[0]">
+            <q-btn flat noCaps class="w-full" @click="changeLocale(lang[1])">{{ lang[0] }}</q-btn>
+          </div>
+        </q-btn-dropdown>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer v-model="leftDrawerOpen" side="left" bordered>
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
@@ -27,6 +33,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
+import { useI18n } from 'vue-i18n';
+
+const i18n = useI18n();
 
 const essentialLinks: EssentialLinkProps[] = [
   {
@@ -72,6 +81,17 @@ const essentialLinks: EssentialLinkProps[] = [
     link: 'https://awesome.quasar.dev',
   },
 ];
+
+const langs = [
+  ['中文', 'zh-CN'],
+  ['English', 'en-US'],
+  ['한국어', 'ko-KR'],
+];
+
+const changeLocale = (locale: string) => {
+  i18n.locale.value = locale;
+  localStorage.setItem('locale', locale);
+};
 
 const leftDrawerOpen = ref(false);
 
