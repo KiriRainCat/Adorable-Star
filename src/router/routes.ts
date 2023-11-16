@@ -4,33 +4,25 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    children: [
+      { path: '', component: () => import('pages/IndexPage.vue') },
+      { path: 'calendar', component: () => import('pages/CalendarPage.vue') },
+      { path: 'detail', component: () => import('pages/DetailPage.vue') },
+      { path: 'admin', component: () => import('pages/AdminPage.vue') },
+    ],
   },
   {
     path: '/auth',
     component: () => import('layouts/AuthLayout.vue'),
     children: [
-      {
-        path: 'register',
-        component: () => import('pages/auth/RegisterPage.vue'),
-      },
-      {
-        path: 'login',
-        component: () => import('pages/auth/LoginPage.vue'),
-      },
-      {
-        path: 'complete-info',
-        component: () => import('pages/auth/InfoFormPage.vue'),
-      },
+      { path: 'register', component: () => import('pages/auth/RegisterPage.vue') },
+      { path: 'login', component: () => import('pages/auth/LoginPage.vue') },
+      { path: 'complete-info', component: () => import('pages/auth/InfoFormPage.vue') },
     ],
   },
 
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
-  },
+  // Matches all path that does't match any page for 404
+  { path: '/:catchAll(.*)*', component: () => import('pages/ErrorNotFound.vue') },
 ];
 
 export default routes;
