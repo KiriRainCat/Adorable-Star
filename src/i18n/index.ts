@@ -10,7 +10,7 @@ export default {
 };
 
 export const langs = [
-  ['中文', 'zh-CN'],
+  [' 中文 ', 'zh-CN'],
   ['English', 'en-US'],
   ['한국어', 'ko-KR'],
 ];
@@ -19,3 +19,5 @@ export const changeLocale = (i18n: ExportedGlobalComposer, locale: string) => {
   i18n.locale = locale;
   localStorage.setItem('locale', locale);
 };
+
+export const version = 'v0.1.0';
