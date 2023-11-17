@@ -7,7 +7,7 @@
         <q-toolbar-title class="-ml-1" @click="$router.push('/')">
           <q-item clickable class="flex items-center max-w-min">
             <q-item-section avatar>
-              <q-avatar class="bg-cover w-10 h-10"><img src="../assets/logo.png" /></q-avatar>
+              <q-avatar class="bg-cover w-10 h-10"><img src="/icons/favicon-128x128.png" /></q-avatar>
             </q-item-section>
             <q-item-label class="text-[1.2rem] font-semibold">萌媛星</q-item-label>
           </q-item>
