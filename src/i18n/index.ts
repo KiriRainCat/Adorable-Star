@@ -10,7 +10,7 @@ export default {
 };
 
 export const langs = [
-  [' 中文 ', 'zh-CN'],
+  ['中文', 'zh-CN'],
   ['English', 'en-US'],
   ['한국어', 'ko-KR'],
 ];
