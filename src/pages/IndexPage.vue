@@ -1,5 +1,42 @@
 <template>
-  <q-page class="items-center justify-evenly flex"></q-page>
+  <q-page class="flex" padding>
+    <q-card class="card mr-4 p-1">
+      <div class="text-center text-xl font-bold py-2">Notifications</div>
+      <q-scroll-area class="h-[92%] w-[40rem]">
+        <q-infinite-scroll>
+          <NotificationItemVue
+            v-for="(notification, idx) in notifications"
+            :="notification"
+            :key="idx"
+            @delete="notifications?.splice(idx, 1)"
+          />
+        </q-infinite-scroll>
+      </q-scroll-area>
+    </q-card>
+    <q-card class="card flex-1 p-4">Homework Completion / Analytics</q-card>
+  </q-page>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { storeToRefs } from 'pinia';
+import { api } from 'src/boot/axios';
+import NotificationItemVue from 'src/components/NotificationItem.vue';
+import { useAppStore } from 'src/stores/app';
+import { onBeforeMount } from 'vue';
+
+const store = useAppStore();
+const { notifications } = storeToRefs(store);
+
+onBeforeMount(() => {
+  api
+    .get('/data/message', { headers: { Instant: 'true' } })
+    .then((res) => store.updateNotifications(res.data.data.data))
+    .catch(() => null);
+});
+</script>
+
+<style scoped lang="scss">
+.card {
+  @apply bg-slate-50 bg-opacity-90;
+}
+</style>
