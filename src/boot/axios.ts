@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Notify } from 'quasar';
-import { useUserStore } from 'src/stores/user';
+import { useAppStore } from 'src/stores/app';
 
 // Create global axios instance
 const api = axios.create({
@@ -29,7 +29,7 @@ api.interceptors.response.use(
     if (res.data.data && res.data.data.gpa) {
       const gpa = res.data.data.gpa;
       const fetchedAt = res.data.data.fetched_at;
-      const store = useUserStore();
+      const store = useAppStore();
 
       store.fetchedAt =
         `${fetchedAt.substring(5, 7)}/${fetchedAt.substring(8, 10)} ` +

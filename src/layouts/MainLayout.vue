@@ -63,7 +63,7 @@ import NavItemVue, { NavItemProps } from 'components/NavItem.vue';
 import { changeLocale, langs, version } from 'src/i18n';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-import { useUserStore } from 'src/stores/user';
+import { useAppStore } from 'src/stores/app';
 import { storeToRefs } from 'pinia';
 
 const $router = useRouter();
@@ -107,7 +107,7 @@ const onLogout = () => {
   $router.replace('/auth/login');
 };
 
-const store = useUserStore();
+const store = useAppStore();
 const { fetchedAt, gpa } = storeToRefs(store);
 </script>
 

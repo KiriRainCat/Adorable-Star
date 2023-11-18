@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
 import { api } from 'src/boot/axios';
-import { useUserStore } from 'src/stores/user';
+import { useAccountStore } from 'src/stores/account';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
@@ -45,7 +45,7 @@ const submitting = ref(false);
 
 const onSubmit = () => {
   submitting.value = true;
-  const store = useUserStore();
+  const store = useAccountStore();
 
   $q.notify({
     type: 'info',
@@ -58,7 +58,7 @@ const onSubmit = () => {
       api
         .post('/user/login', { name: store.name, password: store.password })
         .then((res) => {
-          store.clearAccount();
+          store.clear();
           localStorage.setItem('token', res.data.data);
           $q.notify({
             type: 'positive',

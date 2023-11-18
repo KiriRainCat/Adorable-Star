@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
 import { api } from 'src/boot/axios';
-import { useUserStore } from 'src/stores/user';
+import { useAccountStore } from 'src/stores/account';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
@@ -76,7 +76,7 @@ const onSubmit = () => {
         });
 
         // Store user account info for automatic login after completing Jupiter info
-        const store = useUserStore();
+        const store = useAccountStore();
         store.uid = e.response.data.data;
         store.name = name.value;
         store.password = password.value;
