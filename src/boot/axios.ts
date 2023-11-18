@@ -26,10 +26,11 @@ api.interceptors.response.use(
     }
 
     // Update header info if server sent one
-    const fetchedAt = res.data.data.fetched_at;
-    const gpa = res.data.data.gpa;
-    if (fetchedAt !== null && gpa !== null) {
+    if (res.data.data && res.data.data.gpa) {
+      const gpa = res.data.data.gpa;
+      const fetchedAt = res.data.data.fetched_at;
       const store = useUserStore();
+
       store.fetchedAt =
         `${fetchedAt.substring(5, 7)}/${fetchedAt.substring(8, 10)} ` +
         `${fetchedAt.substring(11, 13)}:${fetchedAt.substring(14, 16)}`;
