@@ -3,7 +3,7 @@ import enUS from './en-US';
 import koKR from './ko-KR';
 import { ExportedGlobalComposer } from 'vue-i18n';
 
-export default {
+export const messages = {
   'zh-CN': zhCN,
   'en-US': enUS,
   'ko-KR': koKR,

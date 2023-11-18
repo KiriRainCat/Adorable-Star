@@ -33,4 +33,5 @@ export default {
   loginSuccess: '登陆成功',
   logoutSuccess: '登出成功',
   verifying: '校验中... 请耐心等待',
+  notifyPermissionRequired: '需要系统通知权限，否则无法在有新作业时通知您，谢谢',
 };
