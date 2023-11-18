@@ -26,7 +26,12 @@
           </template>
         </q-input>
         <div class="cursor-pointer text-blue-500" @click="$router.push('/auth/register')">{{ $t('noAccount') }}</div>
-        <q-btn type="submit" noCaps class="mt-6 px-8 py-2 text-m from-pink-200 to-cyan-200 bg-gradient-to-tr font-bold">
+        <q-btn
+          :loading="submitting"
+          type="submit"
+          noCaps
+          class="mt-6 px-8 py-2 text-m from-pink-200 to-cyan-200 bg-gradient-to-tr font-bold"
+        >
           {{ $t('login') }}
         </q-btn>
       </q-form>
@@ -49,8 +54,10 @@ const { t } = useI18n();
 const isPwd = ref(true);
 const name = ref('');
 const password = ref('');
+const submitting = ref(false);
 
 const onSubmit = () => {
+  submitting.value = true;
   api
     .post('/user/login', { name: name.value, password: password.value })
     .then((res) => {
@@ -76,7 +83,8 @@ const onSubmit = () => {
 
         $router.replace('/auth/complete-info');
       }
-    });
+    })
+    .finally(() => (submitting.value = false));
 };
 </script>
 
