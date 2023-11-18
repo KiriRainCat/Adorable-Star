@@ -38,7 +38,12 @@ export default route(function (/* { store, ssrContext } */) {
         return;
       }
     } else if (to.path.includes('auth')) {
-      next('/');
+      next('/index');
+      return;
+    }
+
+    if (to.path.endsWith('/')) {
+      next('/index');
       return;
     }
 

@@ -1,10 +1,10 @@
 <template>
-  <q-layout view="hHh LpR fFf">
-    <q-header elevated class="bg-primary text-white h-14 flex">
+  <q-layout view="hHh LpR fFf" class="bg">
+    <q-header elevated class="glass bg-[rgba(255,226,253,0.4)] text-white h-14 flex">
       <q-toolbar>
         <q-btn size="medium" dense flat round icon="menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title class="-ml-1" @click="$router.push('/')">
+        <q-toolbar-title class="-ml-1" @click="$router.push('/index')">
           <q-item clickable class="flex items-center max-w-min">
             <q-item-section avatar>
               <q-avatar class="bg-cover w-10 h-10"><img src="/icons/favicon-128x128.png" /></q-avatar>
@@ -16,8 +16,8 @@
         <span class="p-1 flex mr-4 items-center text-end">
           <q-item-section>
             <q-tooltip>{{ $t('fetchTimeDesc') }}</q-tooltip>
-            <q-item-label>11/16 17:25</q-item-label>
-            <q-item-label caption class="text-slate-200 text-[10px]">GPA: 4.67</q-item-label>
+            <q-item-label>{{ fetchedAt || 'None' }}</q-item-label>
+            <q-item-label caption class="text-slate-200 text-[10px]">GPA: {{ gpa || 'None' }}</q-item-label>
           </q-item-section>
         </span>
 
@@ -47,7 +47,7 @@
       </q-item>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container class="glass bg-[rgba(30,30,30,0.25)]">
       <router-view v-slot="{ Component }">
         <transition name="fade">
           <component :is="Component" />
@@ -63,6 +63,8 @@ import NavItemVue, { NavItemProps } from 'components/NavItem.vue';
 import { changeLocale, langs, version } from 'src/i18n';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
+import { useUserStore } from 'src/stores/user';
+import { storeToRefs } from 'pinia';
 
 const $router = useRouter();
 const { t } = useI18n();
@@ -72,25 +74,25 @@ const navItems: NavItemProps[] = [
     title: t('homepage'),
     desc: t('homepageDesc'),
     icon: 'dashboard',
-    link: '/',
+    link: '/index',
   },
   {
     title: t('calendarPage'),
     desc: t('calendarPageDesc'),
     icon: 'event_note',
-    link: '/',
+    link: '/calendar',
   },
   {
     title: t('detailPage'),
     desc: t('detailPageDesc'),
     icon: 'info',
-    link: '/',
+    link: '/detail',
   },
   {
     title: t('adminPage'),
     desc: t('adminPageDesc'),
     icon: 'admin_panel_settings',
-    link: '/',
+    link: '/admin',
   },
 ];
 
@@ -104,6 +106,9 @@ const onLogout = () => {
   localStorage.setItem('token', '');
   $router.replace('/auth/login');
 };
+
+const store = useUserStore();
+const { fetchedAt, gpa } = storeToRefs(store);
 </script>
 
 <style scoped lang="scss">
@@ -115,5 +120,11 @@ const onLogout = () => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.bg {
+  background-image: url('../assets/bg.png');
+  background-size: cover;
+  background-position: bottom;
 }
 </style>
