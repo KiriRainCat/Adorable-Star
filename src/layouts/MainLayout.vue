@@ -41,7 +41,7 @@
           <q-item-label>{{ version }}</q-item-label>
           <q-item-label caption>{{ $t('by') + $t('author') }}</q-item-label>
         </q-item-section>
-        <q-btn class="absolute right-0 mr-4">
+        <q-btn class="absolute right-0 mr-4" @click="onLogout">
           <q-icon name="logout" color="red-4" />
         </q-btn>
       </q-item>
@@ -62,7 +62,9 @@ import { ref } from 'vue';
 import NavItemVue, { NavItemProps } from 'components/NavItem.vue';
 import { changeLocale, langs, version } from 'src/i18n';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
+const $router = useRouter();
 const { t } = useI18n();
 
 const navItems: NavItemProps[] = [
@@ -94,9 +96,14 @@ const navItems: NavItemProps[] = [
 
 const leftDrawerOpen = ref(false);
 
-function toggleLeftDrawer() {
+const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
-}
+};
+
+const onLogout = () => {
+  localStorage.setItem('token', '');
+  $router.replace('/auth/login');
+};
 </script>
 
 <style scoped lang="scss">

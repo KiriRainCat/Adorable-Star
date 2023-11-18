@@ -1,11 +1,11 @@
 <template>
-  <q-layout view="hHh LpR fFf">
-    <q-header elevated class="bg-primary text-white h-14 flex">
+  <q-layout view="hHh LpR fFf" class="bg">
+    <q-header elevated class="glass bg-[rgb(255,255,255,0.2)] text-white h-14 flex">
       <q-toolbar>
         <q-toolbar-title @click="$router.push('/')">
           <q-item clickable class="flex items-center max-w-min">
             <q-item-section avatar>
-              <q-avatar class="bg-cover w-10 h-10"><img src="../assets/logo.png" /></q-avatar>
+              <q-avatar class="bg-cover w-10 h-10"><img src="/icons/favicon-128x128.png" /></q-avatar>
             </q-item-section>
             <q-item-label class="text-[1.2rem] font-semibold">萌媛星</q-item-label>
           </q-item>
@@ -21,7 +21,7 @@
 
     <q-page-container>
       <router-view v-slot="{ Component }">
-        <transition name="fade">
+        <transition name="fade" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
@@ -42,5 +42,11 @@ import { changeLocale, langs } from 'src/i18n';
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.bg {
+  background-image: url('../assets/bg.png');
+  background-size: cover;
+  background-position: bottom;
 }
 </style>

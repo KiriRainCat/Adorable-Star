@@ -29,5 +29,21 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
+  // Global interceptor
+  Router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem('token');
+    if (token === null || token === '') {
+      if (!to.path.includes('auth')) {
+        next('/auth/login');
+        return;
+      }
+    } else if (to.path.includes('auth')) {
+      next('/');
+      return;
+    }
+
+    next();
+  });
+
   return Router;
 });
