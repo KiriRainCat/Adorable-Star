@@ -49,7 +49,7 @@
 
     <q-page-container class="glass bg-[rgba(30,30,30,0.25)]">
       <router-view v-slot="{ Component }">
-        <transition name="fade">
+        <transition name="fade" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
