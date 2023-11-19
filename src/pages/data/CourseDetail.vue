@@ -12,7 +12,7 @@
         </div>
 
         <q-card class="absolute top-2 right-20">
-          <q-btn class="h-10" icon="undo" flat to="/data">
+          <q-btn class="h-10" icon="undo" flat @click="$router.back()">
             <q-tooltip>{{ $t('return') }}</q-tooltip>
           </q-btn>
         </q-card>
