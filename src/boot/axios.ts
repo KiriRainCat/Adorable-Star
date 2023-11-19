@@ -31,9 +31,7 @@ api.interceptors.response.use(
       const fetchedAt = res.data.data.fetched_at;
       const store = useAppStore();
 
-      store.fetchedAt =
-        `${fetchedAt.substring(5, 7)}/${fetchedAt.substring(8, 10)} ` +
-        `${fetchedAt.substring(11, 13)}:${fetchedAt.substring(14, 16)}`;
+      store.fetchedAt = Date.parse(fetchedAt).toString();
       store.gpa = gpa;
     }
 

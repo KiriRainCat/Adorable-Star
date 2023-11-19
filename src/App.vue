@@ -32,12 +32,18 @@ onMounted(() => {
   };
 
   // Start long polling for notifications
-  setInterval(() => fetchNotification(), 1800000);
+  setTimeout(
+    () => {
+      fetchNotification();
+      setInterval(() => fetchNotification(), 1800000);
+    },
+    1800000 - Date.now() + new Date(Number(store.fetchedAt)).getTime(), // 根据上次数据检索的时间计算下次大概在什么时候
+  );
 });
 
 const fetchNotification = (retry?: number) => {
   if (retry != undefined) {
-    if (retry > 8) {
+    if (retry > 3) {
       return;
     }
     retry++;

@@ -9,6 +9,12 @@ export const useAppStore = defineStore('app', {
     gpa: '',
     notifications: new Array<Notification>(),
   }),
+  getters: {
+    getDateString(): string {
+      const str = new Date(Number(this.fetchedAt)).toLocaleString();
+      return `${str.substring(5, 11)} ${str.substring(11, 16)}`;
+    },
+  },
   actions: {
     updateNotifications(notifications: Notification[]) {
       // Filter out new notifications from backend

@@ -16,7 +16,7 @@
         <span class="p-1 flex mr-4 items-center text-end">
           <q-item-section>
             <q-tooltip>{{ $t('fetchTimeDesc') }}</q-tooltip>
-            <q-item-label>{{ fetchedAt || 'None' }}</q-item-label>
+            <q-item-label>{{ store.getDateString || 'None' }}</q-item-label>
             <q-item-label caption class="text-slate-200 text-[10px]">GPA: {{ gpa || 'None' }}</q-item-label>
           </q-item-section>
         </span>
@@ -108,7 +108,7 @@ const onLogout = () => {
 };
 
 const store = useAppStore();
-const { fetchedAt, gpa } = storeToRefs(store);
+const { gpa } = storeToRefs(store);
 </script>
 
 <style scoped lang="scss">
