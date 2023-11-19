@@ -28,6 +28,7 @@ export const useAppStore = defineStore('app', {
             return false;
           }
         }
+        return true;
       });
 
       // Notify user via system notification
