@@ -10,6 +10,7 @@
 import { onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAppStore } from './stores/app';
+import { api } from './boot/axios';
 
 const i18n = useI18n();
 const store = useAppStore();
@@ -31,7 +32,22 @@ onMounted(() => {
   };
 
   // Start long polling for notifications
+  setInterval(() => fetchNotification(), 1800000);
 });
+
+const fetchNotification = (retry?: number) => {
+  if (retry != undefined) {
+    if (retry > 8) {
+      return;
+    }
+    retry++;
+  }
+
+  api
+    .get('/data/message')
+    .then((res) => store.updateNotifications(res.data.data.data))
+    .catch(() => fetchNotification(retry || 1));
+};
 </script>
 
 <style scoped lang="scss">
