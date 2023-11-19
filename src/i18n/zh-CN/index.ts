@@ -36,4 +36,9 @@ export default {
   notifyPermissionRequired: '需要系统通知权限，否则无法在有新作业时通知您，谢谢',
   notification: '通知信息',
   noNotification: '暂无通知',
+  assignmentList: '作业列表',
+  changeStatusTo: '改变状态至',
+  complete: '完成',
+  incomplete: '未完成',
+  return: '返回',
 };
