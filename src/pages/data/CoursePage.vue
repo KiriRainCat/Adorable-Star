@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex" padding>
     <div class="w-full">
-      <q-scroll-area class="h-full min-w-[22rem] max-w-[30rem]">
+      <q-scroll-area class="h-full min-w-[22rem] max-w-[36rem]">
         <course-item v-for="(course, idx) in courses" :key="idx" :="course" />
       </q-scroll-area>
     </div>
