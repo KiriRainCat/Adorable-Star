@@ -36,8 +36,4 @@ onBeforeMount(() => {
 });
 </script>
 
-<style scoped lang="scss">
-.card {
-  @apply bg-slate-50 bg-opacity-90;
-}
-</style>
+<style scoped lang="scss"></style>

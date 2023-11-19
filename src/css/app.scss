@@ -9,3 +9,8 @@
   backdrop-filter: blur(1px);
   box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.1);
 }
+
+// Card color
+.card {
+  @apply bg-slate-50 bg-opacity-90;
+}
