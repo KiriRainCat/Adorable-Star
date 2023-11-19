@@ -44,4 +44,6 @@ export default {
   none: '없음/내용 없음',
   fetchAssignmentDesc: '다시 과제 지침 가져오기',
   directions: '지침',
+  fetchingAssignmentDesc: '과제 지침을 가져오는 중... 기다려주세요',
+  fetchSuccess: '데이터 검색 성공',
 };

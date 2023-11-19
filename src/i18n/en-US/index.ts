@@ -45,4 +45,6 @@ export default {
   none: 'None/No content',
   fetchAssignmentDesc: 'Fetch Assignment Directions Again',
   directions: 'Directions',
+  fetchingAssignmentDesc: 'Fetching assignment instructions... Please be patient',
+  fetchSuccess: 'Data retrieval successful',
 };

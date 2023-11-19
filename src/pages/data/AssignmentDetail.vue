@@ -49,7 +49,7 @@
             </q-btn>
           </q-card>
           <q-card class="ml-4">
-            <q-btn noCaps flat>{{ $t('fetchAssignmentDesc') }}</q-btn>
+            <q-btn noCaps flat @click="onFetchDesc">{{ $t('fetchAssignmentDesc') }}</q-btn>
           </q-card>
         </q-card-section>
 
@@ -63,16 +63,20 @@
 </template>
 
 <script setup lang="ts">
+import { useQuasar } from 'quasar';
 import { api } from 'src/boot/axios';
 import { Assignment } from 'src/components/AssignmentItem.vue';
 import { useAppStore } from 'src/stores/app';
 import { onBeforeMount } from 'vue';
 import { onBeforeUnmount } from 'vue';
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
+const $q = useQuasar();
 const $route = useRoute();
 const store = useAppStore();
+const { t } = useI18n();
 
 const onUpdateStatus = () => {
   if (assignment.value.status) {
@@ -82,6 +86,17 @@ const onUpdateStatus = () => {
     assignment.value.status = 1;
     api.put(`/data/assignment/${assignment.value.id}/1`).catch(() => null);
   }
+};
+
+const onFetchDesc = () => {
+  $q.notify({ type: 'info', message: t('fetchingAssignmentDesc') });
+  api
+    .post(`data/fetch-desc/${assignment.value.id}`, {}, { timeout: 300000 })
+    .then(() => {
+      fetchAssignment(true);
+      $q.notify({ type: 'positive', message: t('fetchSuccess') });
+    })
+    .catch(() => null);
 };
 
 const assignment = ref(<Assignment>{});

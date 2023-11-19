@@ -44,4 +44,6 @@ export default {
   none: '空/无内容',
   fetchAssignmentDesc: '再次检索作业说明',
   directions: '说明',
+  fetchingAssignmentDesc: '正在检索作业说明... 请耐心等待',
+  fetchSuccess: '数据检索成功',
 };
