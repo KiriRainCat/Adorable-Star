@@ -18,7 +18,7 @@ const courses = ref<Course[]>([]);
 
 onBeforeMount(() => {
   api
-    .get('/data/course', { headers: { Instant: 'true' } })
+    .get('/data/course')
     .then((res) => (courses.value = res.data.data.data))
     .catch(() => null);
 });
