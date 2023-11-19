@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable class="flex">
+  <q-item clickable class="flex" :to="assignment === undefined ? `/data/course/${from}` : `/data/assignment/${from}`">
     <span v-if="type == undefined" class="w-1 h-8 bg-pink-300 mr-2"></span>
     <span v-if="type == 1" class="w-1 h-8 bg-cyan-300 mr-2"></span>
     <span v-if="type == 2" class="w-1 h-8 bg-indigo-300 mr-2"></span>
@@ -22,16 +22,20 @@
       </q-item-section>
 
       <q-item-section v-if="type == 1">
-        <q-item-label>
-          {{ msg.split('|')[0] }} Changed: [{{ msg.split('|')[1] }} → {{ msg.split('|')[2] }}]
+        <q-item-label v-if="msg.split('|')[0] === 'Desc'">
+          {{ $t('assignment') + $t('directions') + $t('changed') }}
         </q-item-label>
-        <q-item-label caption>Target: {{ assignment }}</q-item-label>
+        <q-item-label v-else>
+          {{ $t(msg.split('|')[0].toLowerCase()) }} {{ $t('changed') }}: [{{ msg.split('|')[1] }} →
+          {{ msg.split('|')[2] }}]
+        </q-item-label>
+        <q-item-label caption>{{ $t('target') }}: {{ assignment }}</q-item-label>
       </q-item-section>
 
       <q-item-section v-if="type == 2">
         <q-item-label>{{ msg.split('|')[1] }}</q-item-label>
         <q-item-label caption>
-          Previous Grade: {{ msg.split('|')[0] === ' ' ? 'None' : msg.split('|')[0] }}
+          {{ $t('previousGrade') }}: {{ msg.split('|')[0] === ' ' ? 'None' : msg.split('|')[0] }}
         </q-item-label>
       </q-item-section>
     </span>

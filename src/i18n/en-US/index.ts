@@ -35,7 +35,7 @@ export default {
   verifying: 'Verifying... Please wait patiently',
   notifyPermissionRequired:
     "Notification permission is required; otherwise, you won't be notified of new assignments. Thank you",
-  notification: 'Notification',
+  message: 's',
   noNotification: 'No notifications',
   assignmentList: 'Assignment List',
   changeStatusTo: 'Change status to ',
@@ -47,4 +47,14 @@ export default {
   directions: 'Directions',
   fetchingAssignmentDesc: 'Fetching assignment instructions... Please be patient',
   fetchSuccess: 'Data retrieval successful',
+  target: 'Target',
+  changed: ' Changed',
+  due: 'Due Date',
+  grade: 'Grade',
+  score: 'Score',
+  previousGrade: 'Previous Grade',
+  notification: 'Notification',
+  course: 'Course',
+  assignment: 'Assignment ',
+  new: 'New',
 };

@@ -11,11 +11,18 @@ import { onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAppStore } from './stores/app';
 import { api } from './boot/axios';
+import { Notify } from 'quasar';
 
 const i18n = useI18n();
 const store = useAppStore();
 
 onMounted(() => {
+  // Ask notification permission
+  if (window.Notification.permission !== 'granted') {
+    Notify.create({ type: 'warning', message: i18n.t('notifyPermissionRequired') });
+    window.Notification.requestPermission();
+  }
+
   // Locale
   i18n.locale.value = localStorage.getItem('locale')!;
 

@@ -4,6 +4,8 @@ import { i18n } from 'src/boot/i18n';
 import { Course } from 'src/components/CourseItem.vue';
 import { Notification } from 'src/components/NotificationItem.vue';
 
+const t = i18n.global.t;
+
 export const useAppStore = defineStore('app', {
   state: () => ({
     fetchedAt: '',
@@ -20,19 +22,57 @@ export const useAppStore = defineStore('app', {
   actions: {
     updateNotifications(notifications: Notification[]) {
       // Filter out new notifications from backend
-      const newNotifications = notifications.filter((val) => !this.notifications.includes(val));
+      const newNotifications = notifications.filter((val) => {
+        for (let i = 0; i < this.notifications.length; i++) {
+          if (this.notifications[i].id == val.id) {
+            return false;
+          }
+        }
+      });
 
       // Notify user via system notification
       newNotifications.forEach((notification) => {
         if (window.Notification.permission !== 'granted') {
-          Notify.create({ type: 'warning', message: i18n.global.t('notifyPermissionRequired') });
+          Notify.create({ type: 'warning', message: t('notifyPermissionRequired') });
           window.Notification.requestPermission();
         }
 
-        const sysNotification = new window.Notification('萌媛星', {
-          body: `${notification.course} ${notification.assignment} ${notification.msg}`,
-        });
-        sysNotification.onclick;
+        // Notification types
+        switch (notification.type) {
+          case undefined:
+            new window.Notification(`萌媛星 - ${t('new')}${t('assignment')}`, {
+              body: `${notification.assignment}\n${t('course')}: ${notification.course}`,
+            });
+            break;
+          case 1:
+            switch (notification.msg.split('|')[0]) {
+              case 'Desc':
+                new window.Notification(`萌媛星 - ${t('assignment')}${t('directions')}${t('changed')}`, {
+                  body: `${notification.assignment}\n${t('course')}: ${notification.course}`,
+                });
+                break;
+              case 'Due':
+                new window.Notification(`萌媛星 - ${t('assignment')}${t('due')}${t('changed')}`, {
+                  body: `${notification.course} [${notification.msg.split('|')[0]} → ${
+                    notification.msg.split('|')[1]
+                  }]`,
+                });
+                break;
+              case 'Score':
+                new window.Notification(`萌媛星 - ${t('assignment')}${t('score')}${t('changed')}`, {
+                  body: `${notification.course} [${notification.msg.split('|')[0]} → ${
+                    notification.msg.split('|')[1]
+                  }]`,
+                });
+                break;
+            }
+            break;
+          case 2:
+            new window.Notification(`萌媛星 - ${t('course')}${t('grade')}${t('changed')}`, {
+              body: `${notification.course} [${notification.msg.split('|')[0]} → ${notification.msg.split('|')[1]}]`,
+            });
+            break;
+        }
       });
 
       this.notifications = notifications;
