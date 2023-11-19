@@ -1,8 +1,8 @@
 <template>
   <q-page class="flex" padding>
-    <q-card class="card mr-4 p-1">
+    <q-card class="card mr-4 p-1 w-[32rem]">
       <div class="text-center text-xl font-bold py-2">{{ $t('notification') }}</div>
-      <q-scroll-area class="h-[92%] w-[40rem]">
+      <q-scroll-area class="h-[92%] w-full">
         <q-infinite-scroll>
           <div v-if="notifications.length < 1" class="text-center">{{ $t('noNotification') }}</div>
           <NotificationItemVue

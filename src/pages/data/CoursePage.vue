@@ -1,10 +1,8 @@
 <template>
   <q-page class="flex" padding>
-    <div>
-      <q-scroll-area class="h-[92%] w-[40rem]">
-        <q-list>
-          <course-item v-for="(course, idx) in courses" :key="idx" :="course" />
-        </q-list>
+    <div class="w-full">
+      <q-scroll-area class="h-full min-w-[22rem] max-w-[30rem]">
+        <course-item v-for="(course, idx) in courses" :key="idx" :="course" />
       </q-scroll-area>
     </div>
   </q-page>
