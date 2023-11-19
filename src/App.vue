@@ -50,7 +50,7 @@ const fetchNotification = (retry?: number) => {
   }
 
   api
-    .get('/data/message')
+    .get('/data/message', { timeout: 300000 })
     .then((res) => store.updateNotifications(res.data.data.data))
     .catch(() => fetchNotification(retry || 1));
 };
