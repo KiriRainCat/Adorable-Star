@@ -20,20 +20,11 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { api } from 'src/boot/axios';
 import NotificationItemVue from 'src/components/NotificationItem.vue';
 import { useAppStore } from 'src/stores/app';
-import { onBeforeMount } from 'vue';
 
 const store = useAppStore();
 const { notifications } = storeToRefs(store);
-
-onBeforeMount(() => {
-  api
-    .get('/data/message', { headers: { Instant: 'true' } })
-    .then((res) => store.updateNotifications(res.data.data.data))
-    .catch(() => null);
-});
 </script>
 
 <style scoped lang="scss"></style>

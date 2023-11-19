@@ -11,21 +11,28 @@
 <script setup lang="ts">
 import { api } from 'src/boot/axios';
 import CourseItem, { Course } from 'src/components/CourseItem.vue';
+import { useAppStore } from 'src/stores/app';
 import { onBeforeUnmount } from 'vue';
 import { ref } from 'vue';
 import { onBeforeMount } from 'vue';
 
+const store = useAppStore();
+
 const courses = ref<Course[]>([]);
 
-const fetchCourses = () => {
+const fetchCourses = (instant?: boolean) => {
+  if (Date.now() - new Date(Number(store.fetchedAt)).getTime() < 1800000 && !instant) {
+    return;
+  }
+
   api
     .get('/data/course')
     .then((res) => (courses.value = res.data.data.data))
     .catch(() => null);
 };
 
-onBeforeMount(() => fetchCourses());
-window.onfocus = fetchCourses;
+onBeforeMount(() => fetchCourses(true));
+window.onfocus = () => fetchCourses();
 onBeforeUnmount(() => (window.onfocus = null));
 </script>
 
