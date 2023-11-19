@@ -11,17 +11,22 @@
 <script setup lang="ts">
 import { api } from 'src/boot/axios';
 import CourseItem, { Course } from 'src/components/CourseItem.vue';
+import { onBeforeUnmount } from 'vue';
 import { ref } from 'vue';
 import { onBeforeMount } from 'vue';
 
 const courses = ref<Course[]>([]);
 
-onBeforeMount(() => {
+const fetchCourses = () => {
   api
     .get('/data/course')
     .then((res) => (courses.value = res.data.data.data))
     .catch(() => null);
-});
+};
+
+onBeforeMount(() => fetchCourses());
+window.onfocus = fetchCourses;
+onBeforeUnmount(() => (window.onfocus = null));
 </script>
 
 <style scoped lang="scss"></style>
