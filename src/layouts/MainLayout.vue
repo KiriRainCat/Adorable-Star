@@ -29,7 +29,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer bordered side="left" v-model="leftDrawerOpen" class="shadow-lg">
+    <q-drawer bordered behavior="mobile" side="left" v-model="leftDrawerOpen" class="shadow-lg">
       <q-item-label header>{{ $t('navbar') }}</q-item-label>
 
       <q-list>
