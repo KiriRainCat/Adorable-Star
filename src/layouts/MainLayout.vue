@@ -86,7 +86,7 @@ const navItems: NavItemProps[] = [
     title: t('detailPage'),
     desc: t('detailPageDesc'),
     icon: 'info',
-    link: '/detail',
+    link: '/data',
   },
   {
     title: t('adminPage'),
