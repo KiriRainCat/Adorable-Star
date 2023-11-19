@@ -32,16 +32,17 @@ onMounted(() => {
   };
 
   // Start long polling for notifications
+  const delay = 1800000 - Date.now() + new Date(Number(store.fetchedAt)).getTime();
   setTimeout(
     () => {
-      fetchNotification();
+      fetchNotification(undefined, delay < 0 ? true : false);
       setInterval(() => fetchNotification(), 1800000);
     },
-    1800000 - Date.now() + new Date(Number(store.fetchedAt)).getTime(), // 根据上次数据检索的时间计算下次大概在什么时候
+    delay, // 根据上次数据检索的时间计算下次大概在什么时候
   );
 });
 
-const fetchNotification = (retry?: number) => {
+const fetchNotification = (retry?: number, instant?: boolean) => {
   if (retry != undefined) {
     if (retry > 3) {
       return;
@@ -50,7 +51,7 @@ const fetchNotification = (retry?: number) => {
   }
 
   api
-    .get('/data/message', { timeout: 300000 })
+    .get('/data/message', { timeout: 300000, headers: { Instant: instant } })
     .then((res) => store.updateNotifications(res.data.data.data))
     .catch(() => fetchNotification(retry || 1));
 };
