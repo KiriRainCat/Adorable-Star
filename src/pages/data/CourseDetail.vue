@@ -11,26 +11,30 @@
           </q-item-label>
         </div>
 
-        <q-card class="absolute top-2 right-20">
-          <q-btn class="h-10" icon="undo" flat @click="$router.back()">
-            <q-tooltip>{{ $t('return') }}</q-tooltip>
-          </q-btn>
-        </q-card>
-
-        <q-card class="text-xs absolute top-2 right-2 w-fit h-fit p-1 select-none">
-          <div class="flex">
-            <div class="w-2 h-2 bg-pink-300 rounded-full mr-1 mt-1" />
-            = {{ $t('incomplete') }}
-          </div>
-          <div class="flex">
-            <div class="w-2 h-2 bg-cyan-300 rounded-full mr-1 mt-1" />
-            = {{ $t('complete') }}
-          </div>
-        </q-card>
+        <div class="absolute top-2 right-2 flex">
+          <q-card class="mr-2">
+            <q-btn class="h-10" icon="undo" flat @click="$router.back()">
+              <q-tooltip>{{ $t('return') }}</q-tooltip>
+            </q-btn>
+          </q-card>
+          <q-card class="text-xs w-fit h-fit p-1 select-none">
+            <div class="flex">
+              <div class="w-2 h-2 bg-pink-300 rounded-full mr-1 mt-1" />
+              = {{ $t('incomplete') }}
+            </div>
+            <div class="flex">
+              <div class="w-2 h-2 bg-cyan-300 rounded-full mr-1 mt-1" />
+              = {{ $t('complete') }}
+            </div>
+          </q-card>
+        </div>
       </q-card-section>
 
       <q-card-section class="w-full h-[88%]">
         <q-item-label v-if="course.title != undefined" class="ml-6 font-bold">{{ $t('assignmentList') }}:</q-item-label>
+        <q-item-label caption v-if="course.title != undefined && course.assignments == undefined" class="ml-6">
+          {{ $t('none') }}
+        </q-item-label>
         <q-scroll-area class="w-full h-full px-6 py-2">
           <assignment-item
             v-for="(assignment, idx) in course.assignments"

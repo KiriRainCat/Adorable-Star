@@ -41,4 +41,7 @@ export default {
   complete: '完成',
   incomplete: '未完成',
   return: '返回',
+  none: '空/无内容',
+  fetchAssignmentDesc: '再次检索作业说明',
+  directions: '说明',
 };

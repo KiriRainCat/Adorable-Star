@@ -40,7 +40,7 @@
       <q-item class="absolute bottom-0 mb-2 w-full">
         <q-item-section>
           <q-item-label>{{ version }}</q-item-label>
-          <q-item-label caption>{{ $t('by') + $t('author') }}</q-item-label>
+          <q-item-label caption>{{ $t('by') + ' ' + $t('author') }}</q-item-label>
         </q-item-section>
         <q-btn class="absolute right-0 mr-4" @click="onLogout">
           <q-icon name="logout" color="red-4" />
@@ -62,36 +62,34 @@
 import { ref } from 'vue';
 import NavItemVue, { NavItemProps } from 'components/NavItem.vue';
 import { changeLocale, langs, version } from 'src/i18n';
-import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import { useAppStore } from 'src/stores/app';
 import { storeToRefs } from 'pinia';
 
 const $router = useRouter();
-const { t } = useI18n();
 
 const navItems: NavItemProps[] = [
   {
-    title: t('homepage'),
-    desc: t('homepageDesc'),
+    title: 'homepage',
+    desc: 'homepageDesc',
     icon: 'dashboard',
     link: '/index',
   },
   {
-    title: t('calendarPage'),
-    desc: t('calendarPageDesc'),
+    title: 'calendarPage',
+    desc: 'calendarPageDesc',
     icon: 'event_note',
     link: '/calendar',
   },
   {
-    title: t('detailPage'),
-    desc: t('detailPageDesc'),
+    title: 'detailPage',
+    desc: 'detailPageDesc',
     icon: 'info',
     link: '/data',
   },
   {
-    title: t('adminPage'),
-    desc: t('adminPageDesc'),
+    title: 'adminPage',
+    desc: 'adminPageDesc',
     icon: 'admin_panel_settings',
     link: '/admin',
   },

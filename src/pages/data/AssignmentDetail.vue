@@ -11,28 +11,29 @@
           </q-item-label>
         </div>
 
-        <q-card class="absolute top-2 right-20">
-          <q-btn class="h-10" icon="undo" flat @click="$router.back()">
-            <q-tooltip>{{ $t('return') }}</q-tooltip>
-          </q-btn>
-        </q-card>
-
-        <q-card class="text-xs absolute top-2 right-2 w-fit h-fit p-1 select-none">
-          <div class="flex">
-            <div class="w-2 h-2 bg-pink-300 rounded-full mr-1 mt-1" />
-            = {{ $t('incomplete') }}
-          </div>
-          <div class="flex">
-            <div class="w-2 h-2 bg-cyan-300 rounded-full mr-1 mt-1" />
-            = {{ $t('complete') }}
-          </div>
-        </q-card>
+        <div class="absolute top-2 right-2 flex">
+          <q-card class="mr-2">
+            <q-btn class="h-10" icon="undo" flat @click="$router.back()">
+              <q-tooltip>{{ $t('return') }}</q-tooltip>
+            </q-btn>
+          </q-card>
+          <q-card class="text-xs w-fit h-fit p-1 select-none">
+            <div class="flex">
+              <div class="w-2 h-2 bg-pink-300 rounded-full mr-1 mt-1" />
+              = {{ $t('incomplete') }}
+            </div>
+            <div class="flex">
+              <div class="w-2 h-2 bg-cyan-300 rounded-full mr-1 mt-1" />
+              = {{ $t('complete') }}
+            </div>
+          </q-card>
+        </div>
       </q-card-section>
 
       <div v-if="assignment.title != undefined">
-        <q-card-section>
+        <q-card-section class="flex">
           <q-card class="w-fit h-fit">
-            <q-btn flat @click="onUpdateStatus">
+            <q-btn noCaps flat @click="onUpdateStatus">
               <q-tooltip>
                 {{ $t('changeStatusTo') }}{{ assignment.status ? $t('incomplete') : $t('complete') }}
               </q-tooltip>
@@ -47,11 +48,14 @@
               </div>
             </q-btn>
           </q-card>
+          <q-card class="ml-4">
+            <q-btn noCaps flat>{{ $t('fetchAssignmentDesc') }}</q-btn>
+          </q-card>
         </q-card-section>
 
         <q-card-section>
-          <div class="text-lg font-bold">Directions:</div>
-          {{ assignment.desc || 'None' }}
+          <div class="text-lg font-bold">{{ $t('directions') }}:</div>
+          {{ assignment.desc || $t('none') }}
         </q-card-section>
       </div>
     </q-card>
