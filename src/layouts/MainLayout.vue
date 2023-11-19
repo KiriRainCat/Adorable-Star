@@ -27,6 +27,7 @@
           </div>
         </q-btn-dropdown>
       </q-toolbar>
+      <q-ajax-bar position="bottom" color="cyan-1" size="2px" />
     </q-header>
 
     <q-drawer bordered behavior="mobile" side="left" v-model="leftDrawerOpen" class="shadow-lg">
