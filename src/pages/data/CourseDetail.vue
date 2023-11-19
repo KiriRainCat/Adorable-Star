@@ -30,9 +30,9 @@
       </q-card-section>
 
       <q-card-section class="w-full h-[88%]">
-        <q-item-label class="ml-6 font-bold">{{ $t('assignmentList') }}:</q-item-label>
+        <q-item-label v-if="course.title != undefined" class="ml-6 font-bold">{{ $t('assignmentList') }}:</q-item-label>
         <q-scroll-area class="w-full h-full px-6 py-2">
-          <AssignmentItemVue
+          <assignment-item
             v-for="(assignment, idx) in course.assignments"
             :key="idx"
             :assignment="assignment"
@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import { api } from 'src/boot/axios';
-import AssignmentItemVue, { Assignment } from 'src/components/AssignmentItem.vue';
+import AssignmentItem, { Assignment } from 'src/components/AssignmentItem.vue';
 import { useAppStore } from 'src/stores/app';
 import { onBeforeUnmount } from 'vue';
 import { ref } from 'vue';
