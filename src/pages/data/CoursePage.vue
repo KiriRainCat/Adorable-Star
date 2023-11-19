@@ -9,16 +9,16 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import { api } from 'src/boot/axios';
-import CourseItem, { Course } from 'src/components/CourseItem.vue';
+import CourseItem from 'src/components/CourseItem.vue';
 import { useAppStore } from 'src/stores/app';
 import { onBeforeUnmount } from 'vue';
-import { ref } from 'vue';
 import { onBeforeMount } from 'vue';
 
 const store = useAppStore();
 
-const courses = ref<Course[]>([]);
+const { courses } = storeToRefs(store);
 
 const fetchCourses = (instant?: boolean) => {
   if (Date.now() - new Date(Number(store.fetchedAt)).getTime() < 1800000 && !instant) {
@@ -27,7 +27,7 @@ const fetchCourses = (instant?: boolean) => {
 
   api
     .get('/data/course')
-    .then((res) => (courses.value = res.data.data.data))
+    .then((res) => (store.courses = res.data.data.data))
     .catch(() => null);
 };
 

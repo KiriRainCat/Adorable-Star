@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { Notify } from 'quasar';
 import { i18n } from 'src/boot/i18n';
+import { Course } from 'src/components/CourseItem.vue';
 import { Notification } from 'src/components/NotificationItem.vue';
 
 export const useAppStore = defineStore('app', {
@@ -8,6 +9,7 @@ export const useAppStore = defineStore('app', {
     fetchedAt: '',
     gpa: '',
     notifications: new Array<Notification>(),
+    courses: new Array<Course>(),
   }),
   getters: {
     getDateString(): string {

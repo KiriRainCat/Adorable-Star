@@ -23,6 +23,7 @@ onMounted(() => {
   store.gpa = localStorage.getItem('gpa') || '';
   store.fetchedAt = localStorage.getItem('fetchedAt') || '';
   store.notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+  store.courses = JSON.parse(localStorage.getItem('courses') || '[]');
 
   // Store data to local storage on page close
   onbeforeunload = () => {
@@ -30,6 +31,7 @@ onMounted(() => {
     localStorage.setItem('gpa', store.gpa);
     localStorage.setItem('fetchedAt', store.fetchedAt);
     localStorage.setItem('notifications', JSON.stringify(store.notifications));
+    localStorage.setItem('courses', JSON.stringify(store.courses));
   };
 
   // Add focus event listener for notification fetching
