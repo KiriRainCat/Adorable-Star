@@ -54,8 +54,8 @@
         </q-card-section>
 
         <q-card-section>
-          <div class="text-lg font-bold">{{ $t('directions') }}:</div>
-          {{ assignment.desc || $t('none') }}
+          <div class="text-lg font-bold whitespace-pre-wrap">{{ $t('directions') }}:</div>
+          <div v-html="assignment.desc?.replace('\n', '<br /><br />') || $t('none')" />
         </q-card-section>
       </div>
     </q-card>
