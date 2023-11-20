@@ -20,7 +20,7 @@ api.interceptors.request.use((req) => {
 api.interceptors.response.use(
   (res) => {
     // Refresh token if server sent one
-    const token = res.headers['New-Token'];
+    const token = res.headers['new-token'];
     if (token) {
       localStorage.setItem('token', token);
     }
