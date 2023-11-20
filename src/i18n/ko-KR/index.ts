@@ -44,7 +44,7 @@ export default {
   none: '없음/내용 없음',
   fetchAssignmentDesc: '다시 과제 지침 가져오기',
   directions: '지침',
-  fetchingAssignmentDesc: '과제 지침을 가져오는 중... 기다려주세요',
+  fetchingInProgress: '데이터를 가져오는 중... 기다려주세요 (약 5분 소요)',
   fetchSuccess: '데이터 검색 성공',
   target: '목표',
   changed: ' 변경됨',

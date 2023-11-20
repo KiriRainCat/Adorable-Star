@@ -45,7 +45,7 @@ export default {
   none: 'None/No content',
   fetchAssignmentDesc: 'Fetch Assignment Directions Again',
   directions: 'Directions',
-  fetchingAssignmentDesc: 'Fetching assignment instructions... Please be patient',
+  fetchingInProgress: 'Fetching data... Please be patient (approximately 5 minutes)',
   fetchSuccess: 'Data retrieval successful',
   target: 'Target',
   changed: ' Changed',

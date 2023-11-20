@@ -89,11 +89,21 @@ const onUpdateStatus = () => {
 };
 
 const onFetchDesc = () => {
-  $q.notify({ type: 'info', message: t('fetchingAssignmentDesc') });
+  $q.notify({ type: 'info', message: t('fetchingInProgress') });
   api
-    .post(`data/fetch-desc/${assignment.value.id}`, {}, { timeout: 300000 })
-    .then(() => {
-      fetchAssignment(true);
+    .post(`data/fetch-desc/${assignment.value.id}`)
+    .then(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 180000));
+
+      if (assignment.value.id != undefined) {
+        fetchAssignment(true);
+      }
+
+      api
+        .get('/data/message')
+        .then((res) => store.updateNotifications(res.data.data.data))
+        .catch(() => null);
+
       $q.notify({ type: 'positive', message: t('fetchSuccess') });
     })
     .catch(() => null);
