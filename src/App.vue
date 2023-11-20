@@ -44,7 +44,21 @@ onMounted(() => {
   // Add focus event listener for notification fetching
   fetchNotification(undefined, true);
   window.addEventListener('focus', () => fetchNotification());
+
+  // Start bg worker for fetching messages every 30 minutes
+  startFetchOnInterval();
 });
+
+const startFetchOnInterval = async () => {
+  while (true) {
+    const timeToWait = 2100000 - (Date.now() - new Date(Number(store.fetchedAt)).getTime());
+    if (timeToWait > 0) {
+      await new Promise((resolve) => setTimeout(resolve, timeToWait));
+    }
+    fetchNotification();
+    await new Promise((resolve) => setTimeout(resolve, 60000));
+  }
+};
 
 const fetchNotification = (retry?: number, instant?: boolean) => {
   if (Date.now() - new Date(Number(store.fetchedAt)).getTime() < 1800000 && !instant) {
