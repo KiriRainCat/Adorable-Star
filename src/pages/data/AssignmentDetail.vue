@@ -95,7 +95,7 @@ const onFetchDesc = () => {
     .then(async () => {
       await new Promise((resolve) => setTimeout(resolve, 180000));
 
-      if (assignment.value.id != undefined) {
+      if ($route.params['id'] != undefined) {
         fetchAssignment(true);
       }
 
