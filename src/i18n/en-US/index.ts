@@ -57,4 +57,8 @@ export default {
   course: 'Course',
   assignment: 'Assignment ',
   new: 'New',
+  clickTo: 'Click to ',
+  show: 'Show ',
+  hide: 'Hide ',
+  reportCard: 'Report Card',
 };

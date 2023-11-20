@@ -56,4 +56,8 @@ export default {
   course: '科目',
   assignment: '作业',
   new: '新',
+  clickTo: '点击以',
+  show: '显示',
+  hide: '隐藏',
+  reportCard: '成绩报告单',
 };

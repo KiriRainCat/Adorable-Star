@@ -56,4 +56,8 @@ export default {
   course: '과목',
   assignment: '과제 ',
   new: '새로운',
+  clickTo: '클릭하여 ',
+  show: '표시 ',
+  hide: '숨기기 ',
+  reportCard: '성적표',
 };
