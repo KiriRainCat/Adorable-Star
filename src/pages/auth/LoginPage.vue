@@ -43,6 +43,7 @@
 import { useQuasar } from 'quasar';
 import { api } from 'src/boot/axios';
 import { useAccountStore } from 'src/stores/account';
+import { useAppStore } from 'src/stores/app';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
@@ -67,6 +68,12 @@ const onSubmit = () => {
         message: t('loginSuccess'),
       });
       $router.replace('/index');
+
+      const store = useAppStore();
+      api
+        .get('/data/message')
+        .then((res) => store.updateNotifications(res.data.data.data))
+        .catch(() => null);
     })
     .catch((e) => {
       if (e.response.data.code == 428) {
