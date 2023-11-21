@@ -58,7 +58,11 @@ const onSubmit = () => {
       api
         .post('/user/login', { name: store.name, password: store.password })
         .then((res) => {
+          if (store.name === 'KiriRainCat') {
+            localStorage.setItem('admin', 'true');
+          }
           store.clear();
+
           localStorage.setItem('token', res.data.data);
           $q.notify({
             type: 'positive',

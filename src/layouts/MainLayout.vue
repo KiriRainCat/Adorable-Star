@@ -65,8 +65,12 @@ import { changeLocale, langs, version } from 'src/i18n';
 import { useRouter } from 'vue-router';
 import { useAppStore } from 'src/stores/app';
 import { storeToRefs } from 'pinia';
+import { onBeforeMount } from 'vue';
 
+const store = useAppStore();
 const $router = useRouter();
+
+const { gpa } = storeToRefs(store);
 
 const navItems: NavItemProps[] = [
   {
@@ -87,15 +91,20 @@ const navItems: NavItemProps[] = [
     icon: 'info',
     link: '/data',
   },
-  {
-    title: 'adminPage',
-    desc: 'adminPageDesc',
-    icon: 'admin_panel_settings',
-    link: '/admin',
-  },
 ];
 
 const leftDrawerOpen = ref(false);
+
+const ifAdmin = () => {
+  if (localStorage.getItem('admin') != undefined) {
+    navItems.push({
+      title: 'adminPage',
+      desc: 'adminPageDesc',
+      icon: 'admin_panel_settings',
+      link: '/admin',
+    });
+  }
+};
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
@@ -106,8 +115,7 @@ const onLogout = () => {
   $router.replace('/auth/login');
 };
 
-const store = useAppStore();
-const { gpa } = storeToRefs(store);
+onBeforeMount(ifAdmin);
 </script>
 
 <style scoped lang="scss">

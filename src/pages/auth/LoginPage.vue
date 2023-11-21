@@ -69,6 +69,10 @@ const onSubmit = () => {
       });
       $router.replace('/index');
 
+      if (name.value === 'KiriRainCat') {
+        localStorage.setItem('admin', 'true');
+      }
+
       const store = useAppStore();
       api
         .get('/data/message')
