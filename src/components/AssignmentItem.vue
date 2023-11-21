@@ -26,10 +26,11 @@
 <script setup lang="ts">
 export interface Assignment {
   id: number;
+  from: string;
   status?: number;
   due: string;
   title: string;
-  score: string;
+  score?: string;
   desc?: string;
 }
 interface Props {
