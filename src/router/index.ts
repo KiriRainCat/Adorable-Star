@@ -16,8 +16,8 @@ export default route(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
     : process.env.VUE_ROUTER_MODE === 'history'
-      ? createWebHistory
-      : createWebHashHistory;
+    ? createWebHistory
+    : createWebHashHistory;
 
   const Router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
@@ -32,6 +32,11 @@ export default route(function (/* { store, ssrContext } */) {
   // Global interceptor
   Router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('token');
+    if (to.path.includes('doc')) {
+      next();
+      return;
+    }
+
     if (token === null || token === '') {
       if (!to.path.includes('auth')) {
         next('/auth/login');

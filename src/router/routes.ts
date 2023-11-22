@@ -27,6 +27,10 @@ const routes: RouteRecordRaw[] = [
       { path: 'complete-info', component: () => import('pages/auth/InfoFormPage.vue') },
     ],
   },
+  {
+    path: '/doc',
+    children: [{ path: 'cf-cookie', component: () => import('../pages/doc/CfCookie.vue') }],
+  },
 
   // Matches all path that does't match any page for 404
   { path: '/:catchAll(.*)*', component: () => import('pages/ErrorNotFound.vue') },

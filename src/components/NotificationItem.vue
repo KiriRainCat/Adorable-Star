@@ -89,7 +89,9 @@ const onNotificationClick = () => {
   if (props.type == -1 && props.msg.includes('cfToken')) {
     const dialog = $q.dialog({
       title: t('renewCfToken'),
-      message: t('newCfToken'),
+      message:
+        t('newCfToken') + '<br><a class="text-blue underline" target="_blank" href="doc/cf-cookie">查看获取方式</a>',
+      html: true,
       prompt: {
         model: '',
         isValid: (val) => val.length > 5,
