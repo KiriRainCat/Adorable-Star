@@ -112,6 +112,10 @@ import Draggable from 'vuedraggable';
 import { Assignment } from 'src/components/AssignmentItem.vue';
 import { onBeforeMount } from 'vue';
 import { ref } from 'vue';
+import { onBeforeUnmount } from 'vue';
+import { useAppStore } from 'src/stores/app';
+
+const store = useAppStore();
 
 const selectedDate = ref('');
 const selectableDates = ref(['']);
@@ -161,8 +165,10 @@ const onChangeStatus = (event: any, status: number) => {
   }
 };
 
-onBeforeMount(() => {
-  setToNow();
+const fetchAssignments = (instant?: boolean) => {
+  if (Date.now() - new Date(Number(store.fetchedAt)).getTime() < 1800000 && !instant) {
+    return;
+  }
 
   api
     .get('/data/assignment')
@@ -184,5 +190,12 @@ onBeforeMount(() => {
       filterAssignments();
     })
     .catch(() => null);
+};
+
+onBeforeMount(() => {
+  setToNow();
+  fetchAssignments(true);
 });
+window.onfocus = () => fetchAssignments();
+onBeforeUnmount(() => (window.onfocus = null));
 </script>
