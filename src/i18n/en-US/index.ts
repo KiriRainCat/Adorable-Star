@@ -80,4 +80,6 @@ export default {
   cfbpNormal: '(New data will arrive 30 minutes after the time of this message)',
   cfbpImmediate: '(New data will arrive in 5 minutes)',
   moreThanHalfOf: 'More than half of ',
+  filterOutCourse: 'Filter assignments excluding a specific course',
+  noFilter: 'No filter',
 };

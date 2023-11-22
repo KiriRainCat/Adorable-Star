@@ -79,4 +79,6 @@ export default {
   cfbpNormal: '(이 메시지 전송 시간 기준으로 30분 후에 새로운 데이터가 도착합니다)',
   cfbpImmediate: '(이 메시지 전송 시간 기준으로 5분 후에 새로운 데이터가 도착합니다)',
   moreThanHalfOf: '절반 이상 ',
+  filterOutCourse: '특정 과목을 제외한 과제 필터링',
+  noFilter: '필터 없음',
 };
