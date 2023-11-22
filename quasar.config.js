@@ -69,7 +69,7 @@ module.exports = configure(function (/* ctx */) {
       // ignorePublicFolder: true,
       // minify: false,
       // polyfillModulePreload: true,
-      // distDir
+      distDir: '.vscode/dist',
 
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
