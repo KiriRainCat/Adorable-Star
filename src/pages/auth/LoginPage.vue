@@ -62,16 +62,13 @@ const onSubmit = () => {
   api
     .post('/user/login', { name: name.value, password: password.value })
     .then((res) => {
-      localStorage.setItem('token', res.data.data);
+      localStorage.setItem('token', res.data.data.split('|')[0]);
+      localStorage.setItem('status', res.data.data.split('|')[1]);
       $q.notify({
         type: 'positive',
         message: t('loginSuccess'),
       });
       $router.replace('/index');
-
-      if (name.value === 'KiriRainCat') {
-        localStorage.setItem('admin', 'true');
-      }
 
       const store = useAppStore();
       api
