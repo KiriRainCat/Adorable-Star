@@ -79,4 +79,5 @@ export default {
   cfbpRenewed: 'Anti-bot Cookie updated successfully, you can dismiss this notification now ',
   cfbpNormal: '(New data will arrive 30 minutes after the time of this message)',
   cfbpImmediate: '(New data will arrive in 5 minutes)',
+  moreThanHalfOf: 'More than half of ',
 };

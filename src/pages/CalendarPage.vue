@@ -50,6 +50,7 @@
         <q-card class="card mr-4 lg:mb-4 flex-1">
           <q-date
             minimal
+            :key="key"
             :events="(date) => selectableDates.includes(date)"
             :eventColor="generateEventColor"
             v-model="selectedDate"
@@ -77,12 +78,10 @@
             {{ selectedDate === '0001-01-01' ? 'Future' : selectedDate }}
           </div>
         </q-card>
-        <q-card class="card mr-4 flex-1 flex flex-col">
-          <div class="text-center text-lg font-bold py-3">
-            {{ $t('userManual') }} & {{ $t('additional') }}{{ $t('setting') }}
-          </div>
+        <q-card class="card mr-4 flex-1 flex flex-col items-center">
+          <div class="text-lg font-bold py-3">{{ $t('userManual') }} & {{ $t('additional') }}{{ $t('setting') }}</div>
           <div>
-            <q-card class="card ml-4 p-2 w-fit">
+            <q-card class="card px-4 py-2">
               <div class="font-bold">{{ $t('calendarColorDesc') }}</div>
               <div class="flex items-center my-1">
                 <div class="w-2.5 h-2.5 bg-gray-400 rounded-full mr-1"></div>
@@ -92,10 +91,24 @@
                 <div class="w-2.5 h-2.5 bg-pink-300 rounded-full mr-1"></div>
                 {{ $t('mostOf') }}{{ $t('assignment') }}{{ $t('incomplete') }}
               </div>
+              <div class="flex items-center mb-1">
+                <div class="w-2.5 h-2.5 bg-green-500 rounded-full mr-1"></div>
+                {{ $t('moreThanHalfOf') }}{{ $t('assignment') }}{{ $t('completed') }}
+              </div>
               <div class="flex items-center">
                 <div class="w-2.5 h-2.5 bg-cyan-300 rounded-full mr-1"></div>
                 {{ $t('all') }}{{ $t('assignment') }}{{ $t('completed') }}
               </div>
+            </q-card>
+            <q-card class="card mt-4 px-4 py-2">
+              <div class="font-bold">{{ $t('filterOutCourse') }}</div>
+              <q-select
+                v-model="course"
+                @update:modelValue="filterAssignments"
+                behavior="dialog"
+                :options="courses"
+                :option-label="(opt) => (opt === '' ? $t('noFilter') : opt)"
+              />
             </q-card>
           </div>
         </q-card>
@@ -117,6 +130,7 @@ import { useAppStore } from 'src/stores/app';
 
 const store = useAppStore();
 
+const key = ref(1);
 const selectedDate = ref('');
 const selectableDates = ref(['']);
 const setToNow = () => {
@@ -128,7 +142,7 @@ const setToNow = () => {
 };
 const generateEventColor = (date: string): string => {
   const incomplete = assignments.value.filter(
-    (val) => val.due.includes(date.replaceAll('/', '-')) && val.status == undefined,
+    (val) => val.due.includes(date.replaceAll('/', '-')) && val.status == undefined
   );
   const complete = assignments.value.filter((val) => val.due.includes(date.replaceAll('/', '-')) && val.status == 1);
 
@@ -141,26 +155,35 @@ const generateEventColor = (date: string): string => {
   }
 
   if (incomplete.length <= complete.length) {
-    return 'orange-5';
+    return 'green-5';
   }
 
   return 'pink-3';
 };
 
+const course = ref('');
+const courses = ref(['']);
 const assignments = ref<Assignment[]>([]);
 const filteredAssignments = ref<Assignment[][]>([[], []]);
 const filterAssignments = () => {
   filteredAssignments.value[0] = assignments.value.filter(
-    (val) => val.due.includes(selectedDate.value.replaceAll('/', '-')) && val.status == undefined,
+    (val) =>
+      val.due.includes(selectedDate.value.replaceAll('/', '-')) && val.status == undefined && val.from != course.value
   );
   filteredAssignments.value[1] = assignments.value.filter(
-    (val) => val.due.includes(selectedDate.value.replaceAll('/', '-')) && val.status == 1,
+    (val) => val.due.includes(selectedDate.value.replaceAll('/', '-')) && val.status == 1 && val.from != course.value
   );
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const onChangeStatus = (event: any, status: number) => {
   if (event.added) {
+    const l1 = filteredAssignments.value[0].length;
+    const l2 = filteredAssignments.value[0].length;
+    if (l1 == 0 || l1 == l2 || l1 + 1 == l2) {
+      fetchAssignments(true);
+      key.value++;
+    }
     api.put(`/data/assignment/${event.added.element.id}/${status}`).catch(() => null);
   }
 };
@@ -184,6 +207,10 @@ const fetchAssignments = (instant?: boolean) => {
 
         if (!selectableDates.value.includes(due)) {
           selectableDates.value.push(due);
+        }
+
+        if (!courses.value.includes(assignment.from)) {
+          courses.value.push(assignment.from);
         }
       });
 

@@ -78,4 +78,7 @@ export default {
   cfbpRenewed: '反爬虫 Cookie 更新成功，可以删除此通知了 ',
   cfbpNormal: '(新数据将于此消息发送时间的 30 分钟后抵达)',
   cfbpImmediate: '(新数据将于 5 分钟后抵达)',
+  moreThanHalfOf: '过半',
+  filterOutCourse: '过滤排除某科目的作业',
+  noFilter: '无过滤',
 };

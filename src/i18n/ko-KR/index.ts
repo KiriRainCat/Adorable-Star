@@ -78,4 +78,5 @@ export default {
   cfbpRenewed: '반봇 쿠키가 성공적으로 갱신되었습니다, 이 공지를 삭제해도 됩니다 ',
   cfbpNormal: '(이 메시지 전송 시간 기준으로 30분 후에 새로운 데이터가 도착합니다)',
   cfbpImmediate: '(이 메시지 전송 시간 기준으로 5분 후에 새로운 데이터가 도착합니다)',
+  moreThanHalfOf: '절반 이상 ',
 };
