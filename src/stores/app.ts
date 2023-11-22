@@ -40,6 +40,11 @@ export const useAppStore = defineStore('app', {
 
         // Notification types
         switch (notification.type) {
+          case -1:
+            new window.Notification(`萌媛星 - ${t('system')}${t('notification')}`, {
+              body: t(notification.msg),
+            });
+            break;
           case undefined:
             new window.Notification(`萌媛星 - ${t('new')}${t('assignment')}`, {
               body: `${notification.assignment}\n${t('course')}: ${notification.course}`,

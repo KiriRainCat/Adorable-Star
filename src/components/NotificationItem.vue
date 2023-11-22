@@ -1,22 +1,24 @@
 <template>
   <div class="flex">
-    <q-item
-      clickable
-      class="flex flex-1"
-      :to="assignment === undefined ? `/data/course/${from}` : `/data/assignment/${from}`"
-    >
+    <q-item clickable class="flex flex-1" @click="onNotificationClick">
+      <span v-if="type == -1" class="w-1 h-8 bg-red-600 mr-2"></span>
       <span v-if="type == undefined" class="w-1 h-8 bg-pink-300 mr-2"></span>
       <span v-if="type == 1" class="w-1 h-8 bg-cyan-300 mr-2"></span>
       <span v-if="type == 2" class="w-1 h-8 bg-indigo-300 mr-2"></span>
 
       <span class="flex-1">
         <q-item-section>
-          <q-item-label>{{ course }}</q-item-label>
+          <q-item-label>{{ course || $t('system') + $t('notification') }}</q-item-label>
           <q-item-label caption>{{ formatTime(created_at) }}</q-item-label>
         </q-item-section>
       </span>
 
       <span class="flex-1">
+        <q-item-section v-if="type == -1">
+          <q-item-label>{{ $t(msg) }}</q-item-label>
+          <q-item-label caption>{{ $t('clickToLearnMore') }}</q-item-label>
+        </q-item-section>
+
         <q-item-section v-if="type == undefined">
           <q-tooltip v-if="assignment!.length > 37">{{ msg.split('|')[1] }}</q-tooltip>
 
@@ -52,14 +54,21 @@
 </template>
 
 <script setup lang="ts">
+import { useQuasar } from 'quasar';
 import { api } from 'src/boot/axios';
+import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
+
+const $q = useQuasar();
+const $router = useRouter();
+const { t } = useI18n();
 
 export interface Notification {
   id: number;
-  from: number;
+  from?: number;
   type?: number;
   created_at: string;
-  course: string;
+  course?: string;
   assignment?: string;
   msg: string;
 }
@@ -74,6 +83,44 @@ const formatTime = (raw: string) => {
 const onDeleteMsg = () => {
   emit('delete');
   api.delete(`/data/message/${props.id}`).catch(() => null);
+};
+
+const onNotificationClick = () => {
+  if (props.type == -1 && props.msg.includes('cfToken')) {
+    const dialog = $q.dialog({
+      title: t('renewCfToken'),
+      message: t('newCfToken'),
+      prompt: {
+        model: '',
+        isValid: (val) => val.length > 5,
+      },
+      cancel: true,
+    });
+
+    dialog.onOk((payload) => {
+      api
+        .put(`/user/cfbp/${payload}`)
+        .then(() => {
+          const status = Number(localStorage.getItem('status'));
+          $q.notify({
+            type: 'positive',
+            message: t('cfbpRenewed') + (status > 10 ? t('cfbpImmediate') : t('cfbpNormal')),
+          });
+          if (status > 10) {
+            api.post('/data/fetch').catch(() => null);
+            setTimeout(window.focus, 300000);
+          }
+        })
+        .catch(() => null);
+    });
+    return;
+  }
+
+  if (props.assignment === undefined) {
+    $router.push(`/data/course/${props.from}`);
+  } else {
+    $router.push(`/data/assignment/${props.from}`);
+  }
 };
 </script>
 

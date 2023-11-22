@@ -71,4 +71,12 @@ export default {
   mostOf: '多数',
   calendarColorDesc: '日历颜色说明',
   calendarReminder: '日历的颜色并非实时更新，只有切换页面或点击此卡片后后才会刷新',
+  cfToken: '反爬虫 Cookie 失效',
+  clickToLearnMore: '点击以查看详情',
+  system: '系统',
+  renewCfToken: '刷新反爬虫 Cookie',
+  newCfToken: '[cfbp] Cookie 值',
+  cfbpRenewed: '反爬虫 Cookie 更新成功，可以删除此通知了 ',
+  cfbpNormal: '(新数据将于此消息发送时间的 30 分钟后抵达)',
+  cfbpImmediate: '(新数据将于 5 分钟后抵达)',
 };
