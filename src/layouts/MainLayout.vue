@@ -40,8 +40,14 @@
       <q-item class="absolute bottom-0 mb-2 w-full">
         <q-item-section>
           <q-item-label>{{ version }}</q-item-label>
-          <q-item-label caption>{{ $t('by') + ' ' + $t('author') }}</q-item-label>
+          <q-item-label caption>
+            {{ $t('by') + ' ' + $t('author') }}
+            <q-tooltip :offset="[0, 50]">KiriRainCat</q-tooltip>
+          </q-item-label>
         </q-item-section>
+        <q-btn-dropdown class="absolute right-0 mr-20" dropdown-icon="settings" auto-close :menu-offset="[0, 6]">
+          <q-btn flat noCaps class="w-full" @click="changePassword">{{ $t('changePassword') }}</q-btn>
+        </q-btn-dropdown>
         <q-btn class="absolute right-0 mr-4" @click="onLogout">
           <q-icon name="logout" color="red-4" />
           <q-tooltip>{{ $t('logout') }}</q-tooltip>
@@ -69,6 +75,7 @@ import { storeToRefs } from 'pinia';
 import { onBeforeMount } from 'vue';
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
+import ChangePassword from 'src/components/ChangePassword.vue';
 
 const $q = useQuasar();
 const $router = useRouter();
@@ -120,6 +127,8 @@ const onLogout = () => {
   $router.replace('/auth/login');
   $q.notify({ type: 'positive', message: t('logoutSuccess') });
 };
+
+const changePassword = () => $q.dialog({ component: ChangePassword });
 
 onBeforeMount(ifAdmin);
 </script>

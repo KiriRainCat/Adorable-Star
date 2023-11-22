@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Notify } from 'quasar';
 import { useAppStore } from 'src/stores/app';
 import { useRouter } from 'vue-router';
+import { i18n } from './i18n';
 
 // Create global axios instance
 const api = axios.create({
@@ -49,7 +50,7 @@ api.interceptors.response.use(
       case 500:
         Notify.create({
           type: 'negative',
-          message: e.response.data.msg,
+          message: i18n.global.t(e.response.data.msg),
         });
         break;
     }
