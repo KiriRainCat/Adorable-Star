@@ -82,4 +82,5 @@ export default {
   moreThanHalfOf: 'More than half of ',
   filterOutCourse: 'Filter assignments excluding a specific course',
   noFilter: 'No filter',
+  logout: 'Logout',
 };

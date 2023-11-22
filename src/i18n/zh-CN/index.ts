@@ -81,4 +81,5 @@ export default {
   moreThanHalfOf: '过半',
   filterOutCourse: '过滤排除某科目的作业',
   noFilter: '无过滤',
+  logout: '登出',
 };

@@ -81,4 +81,5 @@ export default {
   moreThanHalfOf: '절반 이상 ',
   filterOutCourse: '특정 과목을 제외한 과제 필터링',
   noFilter: '필터 없음',
+  logout: '로그아웃',
 };

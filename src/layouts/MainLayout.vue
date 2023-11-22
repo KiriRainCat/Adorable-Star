@@ -44,6 +44,7 @@
         </q-item-section>
         <q-btn class="absolute right-0 mr-4" @click="onLogout">
           <q-icon name="logout" color="red-4" />
+          <q-tooltip>{{ $t('logout') }}</q-tooltip>
         </q-btn>
       </q-item>
     </q-drawer>
@@ -66,9 +67,13 @@ import { useRouter } from 'vue-router';
 import { useAppStore } from 'src/stores/app';
 import { storeToRefs } from 'pinia';
 import { onBeforeMount } from 'vue';
+import { useQuasar } from 'quasar';
+import { useI18n } from 'vue-i18n';
 
-const store = useAppStore();
+const $q = useQuasar();
 const $router = useRouter();
+const store = useAppStore();
+const { t } = useI18n();
 
 const { gpa } = storeToRefs(store);
 
@@ -113,6 +118,7 @@ const toggleLeftDrawer = () => {
 const onLogout = () => {
   localStorage.setItem('token', '');
   $router.replace('/auth/login');
+  $q.notify({ type: 'positive', message: t('logoutSuccess') });
 };
 
 onBeforeMount(ifAdmin);
