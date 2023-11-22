@@ -70,7 +70,6 @@ export default {
   all: '所有',
   mostOf: '多数',
   calendarColorDesc: '日历颜色说明',
-  calendarReminder: '日历的颜色并非实时更新，只有切换页面或点击此卡片后后才会刷新',
   cfToken: '反爬虫 Cookie 失效',
   clickToLearnMore: '点击以查看详情',
   system: '系统',
