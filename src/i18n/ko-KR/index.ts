@@ -88,6 +88,7 @@ export default {
   originalPassword: '기존 비밀번호',
   newPassword: '새 비밀번호',
   repeat: '다시 입력 ',
+  haveUnreadNotification: '새로운 읽지 않은 알림이 있습니다',
   旧密码不匹配: '이전 비밀번호가 일치하지 않습니다',
   参数错误: '매개변수 오류',
   参数不得为空: '매개변수는 비워 둘 수 없습니다',

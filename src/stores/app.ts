@@ -79,6 +79,18 @@ export const useAppStore = defineStore('app', {
             });
             break;
         }
+
+        // Show non-auto-closable notification that display count of unread notifications
+        Notify.create({
+          type: 'warning',
+          multiLine: false,
+          actions: [
+            { icon: 'info', round: true, to: '/index' },
+            { icon: 'close', color: 'black', round: true },
+          ],
+          timeout: 99999999999,
+          message: t('haveUnreadNotification'),
+        });
       });
 
       this.notifications = notifications;

@@ -89,6 +89,7 @@ export default {
   originalPassword: 'Original Password',
   newPassword: 'New Password',
   repeat: 'Repeat ',
+  haveUnreadNotification: 'You have new unread notification(s)',
   旧密码不匹配: 'Old password does not match',
   参数错误: 'Parameter error',
   参数不得为空: 'Parameter cannot be empty',

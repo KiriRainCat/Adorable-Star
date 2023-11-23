@@ -88,6 +88,7 @@ export default {
   originalPassword: '原密码',
   newPassword: '新密码',
   repeat: '再次输入',
+  haveUnreadNotification: '您有新的未读的通知信息',
   旧密码不匹配: '原密码不匹配',
   参数错误: '参数错误',
   参数不得为空: '参数不得为空',
