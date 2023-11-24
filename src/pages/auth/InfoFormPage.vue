@@ -69,11 +69,18 @@ const onSubmit = () => {
           $router.replace('/index');
 
           $q.notify({ type: 'info', message: t('newUserMsg') });
-          api.post('/data/fetch').catch(() => null);
-          setTimeout(() => {
-            api.get('/data/message').catch(() => null);
-            $q.notify({ type: 'info', message: t('fetchSuccess') });
-          }, 300000);
+          api
+            .post('/data/fetch')
+            .then(() => {
+              api.get('/data/message').catch(() => null);
+              $q.notify({ type: 'info', message: t('fetchSuccess') });
+            })
+            .catch(() =>
+              setTimeout(() => {
+                api.get('/data/message').catch(() => null);
+                $q.notify({ type: 'info', message: t('fetchSuccess') });
+              }, 180000)
+            );
         })
         .catch(() => null);
     })

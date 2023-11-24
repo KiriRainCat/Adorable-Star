@@ -106,11 +106,13 @@ const onNotificationClick = () => {
           const status = Number(localStorage.getItem('status'));
           $q.notify({
             type: 'positive',
-            message: t('cfbpRenewed') + (status > 10 ? t('cfbpImmediate') : t('cfbpNormal')),
+            message: t('cfbpRenewed') + (status >= 1 ? t('cfbpImmediate') : t('cfbpNormal')),
           });
-          if (status > 10) {
-            api.post('/data/fetch').catch(() => null);
-            setTimeout(window.focus, 300000);
+          if (status >= 1) {
+            api
+              .post('/data/fetch')
+              .then(() => window.focus)
+              .catch(() => setTimeout(window.focus, 180000));
           }
         })
         .catch(() => null);

@@ -92,21 +92,8 @@ const onFetchDesc = () => {
   $q.notify({ type: 'info', message: t('fetchingInProgress') });
   api
     .post(`data/fetch-desc/${assignment.value.id}`)
-    .then(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 180000));
-
-      if ($route.params['id'] != undefined) {
-        fetchAssignment(true);
-      }
-
-      api
-        .get('/data/message')
-        .then((res) => store.updateNotifications(res.data.data.data))
-        .catch(() => null);
-
-      $q.notify({ type: 'positive', message: t('fetchSuccess') });
-    })
-    .catch(() => null);
+    .then(() => updateAssignment())
+    .catch(() => setTimeout(() => updateAssignment(), 180000));
 };
 
 const assignment = ref(<Assignment>{});
@@ -120,6 +107,19 @@ const fetchAssignment = (instant?: boolean) => {
     .get(`/data/assignment/${$route.params['id']}`)
     .then((res) => (assignment.value = res.data.data.data))
     .catch(() => null);
+};
+
+const updateAssignment = () => {
+  if ($route.params['id'] != undefined) {
+    fetchAssignment(true);
+  }
+
+  api
+    .get('/data/message')
+    .then((res) => store.updateNotifications(res.data.data.data))
+    .catch(() => null);
+
+  $q.notify({ type: 'positive', message: t('fetchSuccess') });
 };
 
 onBeforeMount(() => fetchAssignment(true));
