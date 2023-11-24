@@ -15,7 +15,7 @@
                 group="assignments"
                 :list="filteredAssignments[0]"
                 itemKey="id"
-                class="flex"
+                :class="'flex' + (filteredAssignments[0].length == 0 ? ' min-h-[10rem]' : '')"
               >
                 <!-- eslint-disable-next-line vue/no-unused-vars -->
                 <template #item="{ element }">
@@ -35,7 +35,7 @@
                 group="assignments"
                 :list="filteredAssignments[1]"
                 itemKey="id"
-                class="flex"
+                :class="'flex' + (filteredAssignments[1].length == 0 ? ' min-h-[10rem]' : '')"
               >
                 <!-- eslint-disable-next-line vue/no-unused-vars -->
                 <template #item="{ element }">
@@ -177,19 +177,19 @@ const filterAssignments = () => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const onChangeStatus = (event: any, status: number) => {
-  api
-    .put(`/data/assignment/${event.added.element.id}/${status}`)
-    .then(() => {
-      if (event.added) {
+  if (event.added) {
+    api
+      .put(`/data/assignment/${event.added.element.id}/${status}`)
+      .then(() => {
         const l1 = filteredAssignments.value[0].length;
         const l2 = filteredAssignments.value[0].length;
         if (l1 == 0 || l1 == l2 || l1 + 1 == l2) {
           fetchAssignments(true);
           key.value++;
         }
-      }
-    })
-    .catch(() => null);
+      })
+      .catch(() => null);
+  }
 };
 
 const fetchAssignments = (instant?: boolean) => {
