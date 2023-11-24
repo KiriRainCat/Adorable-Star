@@ -177,15 +177,19 @@ const filterAssignments = () => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const onChangeStatus = (event: any, status: number) => {
-  if (event.added) {
-    const l1 = filteredAssignments.value[0].length;
-    const l2 = filteredAssignments.value[0].length;
-    if (l1 == 0 || l1 == l2 || l1 + 1 == l2) {
-      fetchAssignments(true);
-      key.value++;
-    }
-    api.put(`/data/assignment/${event.added.element.id}/${status}`).catch(() => null);
-  }
+  api
+    .put(`/data/assignment/${event.added.element.id}/${status}`)
+    .then(() => {
+      if (event.added) {
+        const l1 = filteredAssignments.value[0].length;
+        const l2 = filteredAssignments.value[0].length;
+        if (l1 == 0 || l1 == l2 || l1 + 1 == l2) {
+          fetchAssignments(true);
+          key.value++;
+        }
+      }
+    })
+    .catch(() => null);
 };
 
 const fetchAssignments = (instant?: boolean) => {
