@@ -111,8 +111,16 @@ const onNotificationClick = () => {
           if (status >= 1) {
             api
               .post('/data/fetch')
-              .then(() => window.focus)
-              .catch(() => setTimeout(window.focus, 180000));
+              .then(() => {
+                api.get('/data/message').catch(() => null);
+                $q.notify({ type: 'positive', message: t('fetchSuccess') });
+              })
+              .catch(() =>
+                setTimeout(() => {
+                  api.get('/data/message').catch(() => null);
+                  $q.notify({ type: 'positive', message: t('fetchSuccess') });
+                }, 180000)
+              );
           }
         })
         .catch(() => null);

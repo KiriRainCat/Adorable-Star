@@ -73,12 +73,12 @@ const onSubmit = () => {
             .post('/data/fetch')
             .then(() => {
               api.get('/data/message').catch(() => null);
-              $q.notify({ type: 'info', message: t('fetchSuccess') });
+              $q.notify({ type: 'positive', message: t('fetchSuccess') });
             })
             .catch(() =>
               setTimeout(() => {
                 api.get('/data/message').catch(() => null);
-                $q.notify({ type: 'info', message: t('fetchSuccess') });
+                $q.notify({ type: 'positive', message: t('fetchSuccess') });
               }, 180000)
             );
         })

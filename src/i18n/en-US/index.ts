@@ -92,6 +92,7 @@ export default {
   haveUnreadNotification: 'You have new unread notification(s)',
   newUserMsg:
     'As the account has just been created, the page currently has no data (data will refresh in approximately 5 minutes)',
+  fetchData: 'Fetch Data Manually',
   旧密码不匹配: 'Old password does not match',
   参数错误: 'Parameter error',
   参数不得为空: 'Parameter cannot be empty',
