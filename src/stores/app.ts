@@ -66,9 +66,9 @@ export const useAppStore = defineStore('app', {
                 break;
               case 'Score':
                 new window.Notification(`萌媛星 - ${t('assignment')}${t('score')}${t('changed')}`, {
-                  body: `${notification.course} [${notification.msg.split('|')[0]} → ${
+                  body: `${notification.course} [ ${notification.msg.split('|')[0]} → ${
                     notification.msg.split('|')[1]
-                  }]`,
+                  } ]`,
                 });
                 break;
             }

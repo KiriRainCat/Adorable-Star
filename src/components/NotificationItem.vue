@@ -33,8 +33,8 @@
             {{ $t('assignment') + $t('directions') + $t('changed') }}
           </q-item-label>
           <q-item-label v-else>
-            {{ $t(msg.split('|')[0].toLowerCase()) }} {{ $t('changed') }}: [{{ msg.split('|')[1] }} →
-            {{ msg.split('|')[2] }}]
+            {{ $t(msg.split('|')[0].toLowerCase()) }}{{ $t('changed') }}: [ {{ msg.split('|')[1] }} →
+            {{ msg.split('|')[2] }} ]
           </q-item-label>
           <q-item-label caption>{{ $t('target') }}: {{ assignment }}</q-item-label>
         </q-item-section>
