@@ -12,11 +12,9 @@ import { useI18n } from 'vue-i18n';
 import { useAppStore } from './stores/app';
 import { api } from './boot/axios';
 import { Notify } from 'quasar';
-import { useRoute } from 'vue-router';
 
 const i18n = useI18n();
 const store = useAppStore();
-const $route = useRoute();
 
 onMounted(() => {
   // Ask notification permission
@@ -44,6 +42,7 @@ onMounted(() => {
   };
 
   // Add focus event listener for notification fetching
+  fetchNotification(undefined, true);
   window.addEventListener('focus', () => fetchNotification());
 
   // Start bg worker for fetching messages every 30 minutes
@@ -61,12 +60,8 @@ const startFetchOnInterval = async () => {
   }
 };
 
-const fetchNotification = (retry?: number) => {
-  if ($route.path.includes('auth')) {
-    return;
-  }
-
-  if (Date.now() - new Date(Number(store.fetchedAt)).getTime() < 1800000) {
+const fetchNotification = (retry?: number, instant?: boolean) => {
+  if (Date.now() - new Date(Number(store.fetchedAt)).getTime() < 1800000 && !instant) {
     return;
   }
 

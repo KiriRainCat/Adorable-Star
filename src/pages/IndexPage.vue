@@ -54,6 +54,11 @@ onBeforeMount(() => {
     .get('/data/report', { responseType: 'blob' })
     .then((res) => (img.value = window.URL.createObjectURL(res.data)))
     .catch(() => null);
+
+  api
+    .get('/data/message')
+    .then((res) => store.updateNotifications(res.data.data.data))
+    .catch(() => null);
 });
 </script>
 
