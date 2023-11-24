@@ -46,7 +46,10 @@
           </q-item-label>
         </q-item-section>
         <q-btn-dropdown class="absolute right-0 mr-20" dropdown-icon="settings" auto-close :menu-offset="[0, 6]">
-          <q-btn flat noCaps class="w-full" @click="changePassword">{{ $t('changePassword') }}</q-btn>
+          <div class="flex flex-col">
+            <q-btn flat noCaps class="w-full" @click="changePassword">{{ $t('changePassword') }}</q-btn>
+            <q-btn v-if="status >= 10" flat noCaps class="w-full" @click="fetchData">{{ $t('fetchData') }}</q-btn>
+          </div>
         </q-btn-dropdown>
         <q-btn class="absolute right-0 mr-4" @click="onLogout">
           <q-icon name="logout" color="red-4" />
@@ -76,11 +79,14 @@ import { onBeforeMount } from 'vue';
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
 import ChangePassword from 'src/components/ChangePassword.vue';
+import { api } from 'src/boot/axios';
 
 const $q = useQuasar();
 const $router = useRouter();
 const store = useAppStore();
 const { t } = useI18n();
+
+const status = Number(localStorage.getItem('status'));
 
 const { gpa } = storeToRefs(store);
 
@@ -126,6 +132,22 @@ const onLogout = () => {
   localStorage.setItem('token', '');
   $router.replace('/auth/login');
   $q.notify({ type: 'positive', message: t('logoutSuccess') });
+};
+
+const fetchData = () => {
+  $q.notify({ type: 'info', message: t('fetchingInProgress') });
+  api
+    .post('/data/fetch')
+    .then(() => {
+      api.get('/data/message').catch(() => null);
+      $q.notify({ type: 'positive', message: t('fetchSuccess') });
+    })
+    .catch(() =>
+      setTimeout(() => {
+        api.get('/data/message').catch(() => null);
+        $q.notify({ type: 'positive', message: t('fetchSuccess') });
+      }, 180000)
+    );
 };
 
 const changePassword = () => $q.dialog({ component: ChangePassword });

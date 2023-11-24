@@ -90,6 +90,7 @@ export default {
   repeat: '再次输入',
   haveUnreadNotification: '您有新的未读的通知信息',
   newUserMsg: '由于账号刚被创建，所以页面暂时是无数据的 (数据将在大约5分钟后刷新)',
+  fetchData: '手动检索数据',
   旧密码不匹配: '原密码不匹配',
   参数错误: '参数错误',
   参数不得为空: '参数不得为空',
