@@ -60,7 +60,7 @@ const startFetchOnInterval = async () => {
   }
 };
 
-const fetchNotification = (retry?: number, instant?: boolean) => {
+const fetchNotification = async (retry?: number, instant?: boolean) => {
   if (Date.now() - new Date(Number(store.fetchedAt)).getTime() < 1800000 && !instant) {
     return;
   }
@@ -69,6 +69,7 @@ const fetchNotification = (retry?: number, instant?: boolean) => {
     if (retry > 3) {
       return;
     }
+    await new Promise((resolve) => setTimeout(resolve, 180000));
     retry++;
   }
 
