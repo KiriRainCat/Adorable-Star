@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh LpR fFf" class="bg">
+  <q-layout view="hHh LpR fFf" class="bg max-sm:text-xs">
     <q-header elevated class="glass bg-[rgba(255,226,253,0.4)] text-white h-14 flex">
       <q-toolbar>
         <q-btn size="medium" dense flat round icon="menu" @click="toggleLeftDrawer" />
@@ -21,15 +21,9 @@
           </q-item-section>
         </span>
 
-        <q-btn-dropdown
-          class="text-xs"
-          :rounded="!$q.screen.gt.sm"
-          :dense="!$q.screen.gt.sm"
-          dropdown-icon="language"
-          auto-close
-        >
+        <q-btn-dropdown :rounded="!$q.screen.gt.sm" :dense="!$q.screen.gt.sm" dropdown-icon="language" auto-close>
           <div v-for="lang in langs" :key="lang[0]">
-            <q-btn flat noCaps class="w-full max-sm:text-xs" @click="changeLocale($i18n, lang[1])">{{ lang[0] }}</q-btn>
+            <q-btn flat noCaps class="w-full" @click="changeLocale($i18n, lang[1])">{{ lang[0] }}</q-btn>
           </div>
         </q-btn-dropdown>
       </q-toolbar>
@@ -53,8 +47,10 @@
         </q-item-section>
         <q-btn-dropdown class="absolute right-0 mr-20" dropdown-icon="settings" auto-close :menu-offset="[0, 6]">
           <div class="flex flex-col">
-            <q-btn flat noCaps class="w-full" @click="changePassword">{{ $t('changePassword') }}</q-btn>
-            <q-btn v-if="status >= 10" flat noCaps class="w-full" @click="fetchData">{{ $t('fetchData') }}</q-btn>
+            <q-btn flat noCaps class="w-full max-sm:text-xs" @click="changePassword">{{ $t('changePassword') }}</q-btn>
+            <q-btn v-if="status >= 10" flat noCaps class="w-full max-sm:text-xs" @click="fetchData">
+              {{ $t('fetchData') }}
+            </q-btn>
           </div>
         </q-btn-dropdown>
         <q-btn class="absolute right-0 mr-4" @click="onLogout">
@@ -160,21 +156,3 @@ const changePassword = () => $q.dialog({ component: ChangePassword });
 
 onBeforeMount(ifAdmin);
 </script>
-
-<style scoped lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.bg {
-  background-image: url('../assets/bg.png');
-  background-size: cover;
-  background-position: bottom;
-}
-</style>

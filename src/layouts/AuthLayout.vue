@@ -34,21 +34,3 @@
 <script setup lang="ts">
 import { changeLocale, langs } from 'src/i18n';
 </script>
-
-<style scoped lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.bg {
-  background-image: url('../assets/bg.png');
-  background-size: cover;
-  background-position: bottom;
-}
-</style>
