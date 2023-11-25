@@ -3,21 +3,21 @@
     <q-card class="card p-1 flex-1">
       <q-card-section>
         <div>
-          <q-item-label class="text-xl font-bold">
+          <q-item-label class="sm:text-xl font-bold">
             {{ assignment.title }}
           </q-item-label>
-          <q-item-label caption class="text-[1rem] font-semibold">
+          <q-item-label caption class="sm:text-[1rem] font-semibold">
             {{ assignment.score }}
           </q-item-label>
         </div>
 
-        <div class="absolute top-2 right-2 flex">
-          <q-card class="mr-2">
-            <q-btn class="h-10" icon="undo" flat @click="$router.back()">
+        <div class="absolute top-2 right-2 flex max-sm:flex-col-reverse">
+          <q-card class="sm:mr-2 max-sm:mt-2 text-center">
+            <q-btn class="h-full text-xs z-10" icon="undo" flat @click="$router.back()">
               <q-tooltip>{{ $t('return') }}</q-tooltip>
             </q-btn>
           </q-card>
-          <q-card class="text-xs w-fit h-fit p-1 select-none">
+          <q-card class="text-xs w-fit h-fit p-1 select-none max-sm:text-[0.6rem]">
             <div class="flex">
               <div class="w-2 h-2 bg-pink-300 rounded-full mr-1 mt-1" />
               = {{ $t('incomplete') }}
@@ -33,7 +33,7 @@
       <div v-if="assignment.title != undefined">
         <q-card-section class="flex">
           <q-card class="w-fit h-fit">
-            <q-btn noCaps flat @click="onUpdateStatus">
+            <q-btn noCaps flat @click="onUpdateStatus" class="max-sm:p-2 max-sm:text-[0.6rem]">
               <q-tooltip>
                 {{ $t('changeStatusTo') }}{{ assignment.status ? $t('incomplete') : $t('complete') }}
               </q-tooltip>
@@ -48,14 +48,16 @@
               </div>
             </q-btn>
           </q-card>
-          <q-card class="ml-4">
-            <q-btn noCaps flat @click="onFetchDesc">{{ $t('fetchAssignmentDesc') }}</q-btn>
+          <q-card class="ml-4 max-sm:ml-2">
+            <q-btn noCaps flat @click="onFetchDesc" class="max-sm:p-2 max-sm:text-[0.6rem]">
+              {{ $t('fetchAssignmentDesc') }}
+            </q-btn>
           </q-card>
         </q-card-section>
 
         <q-card-section>
-          <div class="text-lg font-bold whitespace-pre-wrap">{{ $t('directions') }}:</div>
-          <div v-html="assignment.desc?.replace('\n', '<br /><br />') || $t('none')" />
+          <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('directions') }}:</div>
+          <div class="max-sm:text-xs" v-html="assignment.desc?.replace('\n', '<br /><br />') || $t('none')" />
         </q-card-section>
       </div>
     </q-card>

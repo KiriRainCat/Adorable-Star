@@ -46,8 +46,8 @@
           </q-card>
         </div>
       </q-card>
-      <div class="lg:w-[28rem] w-full mt-4 flex lg:flex-col lg:min-h-[47.7rem] min-h-[30rem]">
-        <q-card class="card mr-4 mb-4 flex-1">
+      <div class="lg:w-[28rem] w-full mt-4 flex lg:flex-col lg:min-h-[47.7rem]">
+        <q-card class="card mr-4 mb-4 flex-1 min-h-[24rem]">
           <q-date
             minimal
             :key="key"
@@ -78,7 +78,7 @@
             {{ selectedDate === '0001-01-01' ? 'Future' : selectedDate }}
           </div>
         </q-card>
-        <q-card class="card mr-4 flex-1 flex flex-col items-center min-h-[20rem]">
+        <q-card class="card mr-4 flex-1 flex flex-col items-center min-h-[24rem]">
           <div class="text-lg font-bold py-3">{{ $t('userManual') }} & {{ $t('additional') }}{{ $t('setting') }}</div>
           <div>
             <q-card class="card px-4 py-2">

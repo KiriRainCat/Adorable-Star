@@ -3,21 +3,21 @@
     <q-card class="card p-1 flex-1">
       <q-card-section>
         <div>
-          <q-item-label class="text-xl font-bold">
+          <q-item-label class="sm:text-xl font-bold">
             {{ course.title }}
           </q-item-label>
-          <q-item-label caption class="text-[1rem] font-semibold">
+          <q-item-label caption class="sm:text-[1rem] font-semibold">
             {{ course.percent_grade }} {{ course.letter_grade }}
           </q-item-label>
         </div>
 
-        <div class="absolute top-2 right-2 flex">
-          <q-card class="mr-2">
-            <q-btn class="h-10" icon="undo" flat @click="$router.back()">
+        <div class="absolute top-2 right-2 flex max-sm:flex-col-reverse">
+          <q-card class="sm:mr-2 max-sm:mt-2 text-center">
+            <q-btn class="h-full text-xs z-10" icon="undo" flat @click="$router.back()">
               <q-tooltip>{{ $t('return') }}</q-tooltip>
             </q-btn>
           </q-card>
-          <q-card class="text-xs w-fit h-fit p-1 select-none">
+          <q-card class="text-xs w-fit h-fit p-1 select-none max-sm:text-[0.6rem]">
             <div class="flex">
               <div class="w-2 h-2 bg-pink-300 rounded-full mr-1 mt-1" />
               = {{ $t('incomplete') }}
@@ -35,7 +35,7 @@
         <q-item-label caption v-if="course.title != undefined && course.assignments == undefined" class="ml-6">
           {{ $t('none') }}
         </q-item-label>
-        <q-scroll-area class="w-full h-full px-6 py-2">
+        <q-scroll-area class="w-full h-[94%] px-6 my-2" :barStyle="{ width: '4px' }" :thumbStyle="{ width: '4px' }">
           <assignment-item
             v-for="(assignment, idx) in course.assignments"
             :key="idx"

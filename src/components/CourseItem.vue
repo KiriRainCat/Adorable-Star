@@ -3,13 +3,13 @@
     <q-item clickable :to="`/data/course/${id}`" class="flex items-center">
       <span>
         <q-item-section>
-          <q-item-label class="font-bold">{{ title }}</q-item-label>
+          <q-item-label class="font-bold max-sm:text-xs">{{ title }}</q-item-label>
         </q-item-section>
       </span>
       <span class="flex-1" />
       <span>
         <q-item-section>
-          <q-item-label>{{ percent_grade }} {{ letter_grade }}</q-item-label>
+          <q-item-label class="max-sm:text-xs">{{ percent_grade }} {{ letter_grade }}</q-item-label>
         </q-item-section>
       </span>
     </q-item>
