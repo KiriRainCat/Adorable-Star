@@ -57,7 +57,7 @@
 
         <q-card-section>
           <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('directions') }}:</div>
-          <div class="max-sm:text-xs" v-html="assignment.desc?.replace('\n', '<br /><br />') || $t('none')" />
+          <div class="max-sm:text-xs" v-html="assignment.desc || $t('none')" />
         </q-card-section>
       </div>
     </q-card>
