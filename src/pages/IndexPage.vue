@@ -1,7 +1,7 @@
 <template>
   <q-scroll-area class="w-[100vw] h-[93.3vh]" :bar-style="{ opacity: '0' }" :thumb-style="{ opacity: '0' }">
-    <q-page class="flex pl-4 pb-4">
-      <q-card class="card flex-1 mt-4 mr-4 p-1 sm:min-w-[32rem] min-h-[47.7rem] max-h-[47.7rem]">
+    <q-page class="flex pl-4 sm:pb-4 max-sm:pb-32">
+      <q-card class="card flex-1 mt-4 mr-4 p-1 sm:min-w-[32rem] min-h-[47.7rem]">
         <div class="text-center text-xl font-bold py-2">{{ $t('notification') + $t('message') }}</div>
         <q-scroll-area class="h-[92%] w-full">
           <q-infinite-scroll>
@@ -15,7 +15,7 @@
           </q-infinite-scroll>
         </q-scroll-area>
       </q-card>
-      <div class="w-[28rem] mt-4 flex flex-col min-h-[47.7rem] max-h-[47.7rem]">
+      <div class="sm:min-w-[28rem] mt-4 flex flex-col min-h-[47.7rem]">
         <q-card class="card mr-4 mb-4 cursor-pointer" @click="showReportCard = !showReportCard" v-if="img !== ''">
           <q-tooltip>{{ (showReportCard ? $t('hide') : $t('show')) + $t('reportCard') }}</q-tooltip>
           <q-item-section class="absolute top-4 left-4" v-if="!showReportCard">
@@ -30,7 +30,7 @@
         </q-card>
         <q-card class="card mr-4 flex-1"></q-card>
       </div>
-      <q-card class="card flex-1 mt-4 mr-4 sm:min-w-[24rem] min-h-[47.7rem] max-h-[47.7rem]"></q-card>
+      <q-card class="card flex-1 mt-4 mr-4 sm:min-w-[24rem] min-h-[47.7rem]"></q-card>
     </q-page>
   </q-scroll-area>
 </template>

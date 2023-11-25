@@ -1,10 +1,10 @@
 <template>
   <q-scroll-area class="w-[100vw] h-[93.3vh]" :bar-style="{ opacity: '0' }" :thumb-style="{ opacity: '0' }">
-    <q-page class="flex pl-4 pb-4">
+    <q-page class="flex pl-4 pb-4 max-sm:pb-32">
       <q-card class="card flex-1 mt-4 mr-4 p-1 sm:min-w-[32rem] min-h-[47.7rem]">
         <div class="text-center text-xl font-bold py-3">{{ $t('assignment') }}</div>
-        <div class="px-4">
-          <q-card class="card mb-5 h-[39vh] flex justify-center">
+        <div class="px-4 h-full">
+          <q-card class="card mb-5 h-[43%] flex justify-center">
             <div class="font-semibold -my-4 flex items-center">
               <div class="w-3 h-3 bg-pink-300 rounded-full mr-1"></div>
               {{ $t('incomplete') }}
@@ -24,7 +24,7 @@
               </draggable>
             </q-scroll-area>
           </q-card>
-          <q-card class="card h-[39vh] flex justify-center">
+          <q-card class="card h-[43%] flex justify-center">
             <div class="font-semibold -my-4 flex items-center">
               <div class="w-3 h-3 bg-cyan-300 rounded-full mr-1"></div>
               {{ $t('completed') }}
@@ -47,7 +47,7 @@
         </div>
       </q-card>
       <div class="lg:w-[28rem] w-full mt-4 flex lg:flex-col lg:min-h-[47.7rem] min-h-[30rem]">
-        <q-card class="card mr-4 lg:mb-4 flex-1">
+        <q-card class="card mr-4 mb-4 flex-1">
           <q-date
             minimal
             :key="key"
@@ -78,7 +78,7 @@
             {{ selectedDate === '0001-01-01' ? 'Future' : selectedDate }}
           </div>
         </q-card>
-        <q-card class="card mr-4 flex-1 flex flex-col items-center">
+        <q-card class="card mr-4 flex-1 flex flex-col items-center min-h-[20rem]">
           <div class="text-lg font-bold py-3">{{ $t('userManual') }} & {{ $t('additional') }}{{ $t('setting') }}</div>
           <div>
             <q-card class="card px-4 py-2">

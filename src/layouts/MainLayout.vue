@@ -9,7 +9,7 @@
             <q-item-section avatar>
               <q-avatar class="bg-cover w-10 h-10"><img src="/icons/favicon-128x128.png" /></q-avatar>
             </q-item-section>
-            <q-item-label class="text-[1.2rem] font-semibold">萌媛星</q-item-label>
+            <q-item-label v-if="$q.screen.gt.sm" class="text-[1.2rem] font-semibold">萌媛星</q-item-label>
           </q-item>
         </q-toolbar-title>
 
