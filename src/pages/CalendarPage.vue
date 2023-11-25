@@ -1,10 +1,10 @@
 <template>
   <q-scroll-area class="w-[100vw] h-[93.3vh]" :bar-style="{ opacity: '0' }" :thumb-style="{ opacity: '0' }">
-    <q-page class="flex pl-4 pb-4 max-sm:pb-32">
+    <q-page class="flex pl-4 sm:pb-4 max-sm:pb-32">
       <q-card class="card flex-1 mt-4 mr-4 p-1 sm:min-w-[32rem] min-h-[47.7rem]">
         <div class="text-center text-xl font-bold py-3">{{ $t('assignment') }}</div>
-        <div class="px-4 h-full">
-          <q-card class="card mb-5 h-[43%] flex justify-center">
+        <div class="px-4 h-[82vh]">
+          <q-card class="card mb-5 h-[46%] flex justify-center">
             <div class="font-semibold -my-4 flex items-center">
               <div class="w-3 h-3 bg-pink-300 rounded-full mr-1"></div>
               {{ $t('incomplete') }}
@@ -24,7 +24,7 @@
               </draggable>
             </q-scroll-area>
           </q-card>
-          <q-card class="card h-[43%] flex justify-center">
+          <q-card class="card h-[46%] flex justify-center">
             <div class="font-semibold -my-4 flex items-center">
               <div class="w-3 h-3 bg-cyan-300 rounded-full mr-1"></div>
               {{ $t('completed') }}
