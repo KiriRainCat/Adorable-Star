@@ -17,7 +17,7 @@ const store = useAppStore();
 
 onMounted(() => {
   // Locale
-  i18n.locale.value = localStorage.getItem('locale')! || 'zh-CN';
+  i18n.locale.value = localStorage.getItem('locale') || navigator.language;
 
   // Get previous data from local storage
   store.gpa = localStorage.getItem('gpa') || '';

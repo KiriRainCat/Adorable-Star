@@ -38,7 +38,10 @@
               {{ $t(msg.split('|')[0].toLowerCase()) }}{{ $t('changed') }}: [ {{ msg.split('|')[1] }} →
               {{ msg.split('|')[2] }} ]
             </q-item-label>
-            <q-item-label caption>{{ $t('target') }}: {{ assignment }}</q-item-label>
+            <q-item-label caption c>
+              {{ $t('target') }}:
+              {{ (assignment?.length || 0) > 32 ? assignment?.substring(0, 32) + '...' : assignment }}
+            </q-item-label>
           </q-item-section>
 
           <q-item-section v-if="type == 2">
