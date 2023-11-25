@@ -1,112 +1,114 @@
 <template>
-  <!-- *Desktop* -->
-  <div class="flex" v-if="$q.screen.gt.sm">
-    <q-item clickable class="flex flex-1" @click="onNotificationClick">
-      <span v-if="type == -1" class="w-1 h-8 bg-red-600 mr-2"></span>
-      <span v-if="type == undefined" class="w-1 h-8 bg-pink-300 mr-2"></span>
-      <span v-if="type == 1" class="w-1 h-8 bg-cyan-300 mr-2"></span>
-      <span v-if="type == 2" class="w-1 h-8 bg-indigo-300 mr-2"></span>
+  <div>
+    <!-- *Desktop* -->
+    <div class="flex" v-if="$q.screen.gt.sm">
+      <q-item clickable class="flex flex-1" @click="onNotificationClick">
+        <span v-if="type == -1" class="w-1 h-8 bg-red-600 mr-2"></span>
+        <span v-if="type == undefined" class="w-1 h-8 bg-pink-300 mr-2"></span>
+        <span v-if="type == 1" class="w-1 h-8 bg-cyan-300 mr-2"></span>
+        <span v-if="type == 2" class="w-1 h-8 bg-indigo-300 mr-2"></span>
 
-      <span class="flex-1">
-        <q-item-section>
-          <q-item-label>{{ course || $t('system') + $t('notification') }}</q-item-label>
-          <q-item-label caption>{{ formatTime(created_at) }}</q-item-label>
-        </q-item-section>
-      </span>
+        <span class="flex-1">
+          <q-item-section>
+            <q-item-label>{{ course || $t('system') + $t('notification') }}</q-item-label>
+            <q-item-label caption>{{ formatTime(created_at) }}</q-item-label>
+          </q-item-section>
+        </span>
 
-      <span class="flex-1">
-        <q-item-section v-if="type == -1">
-          <q-item-label>{{ $t(msg) }}</q-item-label>
-          <q-item-label caption>{{ $t('clickToLearnMore') }}</q-item-label>
-        </q-item-section>
+        <span class="flex-1">
+          <q-item-section v-if="type == -1">
+            <q-item-label>{{ $t(msg) }}</q-item-label>
+            <q-item-label caption>{{ $t('clickToLearnMore') }}</q-item-label>
+          </q-item-section>
 
-        <q-item-section v-if="type == undefined">
-          <q-tooltip v-if="assignment!.length > 37">{{ msg.split('|')[1] }}</q-tooltip>
+          <q-item-section v-if="type == undefined">
+            <q-tooltip v-if="assignment!.length > 37">{{ msg.split('|')[1] }}</q-tooltip>
 
-          <q-item-label>
-            {{ assignment!.length > 37 ? `${assignment!.substring(0, 39)}...` : assignment }}
-          </q-item-label>
-          <q-item-label caption>Due: {{ msg }}</q-item-label>
-        </q-item-section>
+            <q-item-label>
+              {{ assignment!.length > 37 ? `${assignment!.substring(0, 39)}...` : assignment }}
+            </q-item-label>
+            <q-item-label caption>Due: {{ msg }}</q-item-label>
+          </q-item-section>
 
-        <q-item-section v-if="type == 1">
-          <q-item-label v-if="msg.split('|')[0] === 'Desc'">
-            {{ $t('assignment') + $t('directions') + $t('changed') }}
-          </q-item-label>
-          <q-item-label v-else>
-            {{ $t(msg.split('|')[0].toLowerCase()) }}{{ $t('changed') }}: [ {{ msg.split('|')[1] }} →
-            {{ msg.split('|')[2] }} ]
-          </q-item-label>
-          <q-item-label caption>{{ $t('target') }}: {{ assignment }}</q-item-label>
-        </q-item-section>
+          <q-item-section v-if="type == 1">
+            <q-item-label v-if="msg.split('|')[0] === 'Desc'">
+              {{ $t('assignment') + $t('directions') + $t('changed') }}
+            </q-item-label>
+            <q-item-label v-else>
+              {{ $t(msg.split('|')[0].toLowerCase()) }}{{ $t('changed') }}: [ {{ msg.split('|')[1] }} →
+              {{ msg.split('|')[2] }} ]
+            </q-item-label>
+            <q-item-label caption>{{ $t('target') }}: {{ assignment }}</q-item-label>
+          </q-item-section>
 
-        <q-item-section v-if="type == 2">
-          <q-item-label>{{ msg.split('|')[1] }}</q-item-label>
-          <q-item-label caption>
-            {{ $t('previousGrade') }}: {{ msg.split('|')[0] === ' ' ? 'None' : msg.split('|')[0] }}
-          </q-item-label>
-        </q-item-section>
-      </span>
-    </q-item>
-    <q-btn flat @click="onDeleteMsg">
-      <q-icon name="close" color="red-10" />
-    </q-btn>
-  </div>
-
-  <!-- *Mobile* -->
-  <div class="flex" v-else>
-    <div class="absolute left-2 mt-2">
-      <div v-if="type == -1" class="w-1 h-12 bg-red-600 mr-2"></div>
-      <div v-if="type == undefined" class="w-1 h-12 bg-pink-300 mr-2"></div>
-      <div v-if="type == 1" class="w-1 h-12 bg-cyan-300 mr-2"></div>
-      <div v-if="type == 2" class="w-1 h-12 bg-indigo-300 mr-2"></div>
+          <q-item-section v-if="type == 2">
+            <q-item-label>{{ msg.split('|')[1] }}</q-item-label>
+            <q-item-label caption>
+              {{ $t('previousGrade') }}: {{ msg.split('|')[0] === ' ' ? 'None' : msg.split('|')[0] }}
+            </q-item-label>
+          </q-item-section>
+        </span>
+      </q-item>
+      <q-btn flat @click="onDeleteMsg">
+        <q-icon name="close" color="red-10" />
+      </q-btn>
     </div>
 
-    <q-item clickable class="flex-1 flex flex-col ml-1" @click="onNotificationClick">
-      <q-item-section>
-        <q-item-label class="text-[0.6rem]">
-          {{ course || $t('system') + $t('notification') }}
-          <span class="text-[0.55rem] text-gray-600">( {{ formatTime(created_at) }} )</span>
-        </q-item-label>
-      </q-item-section>
-
-      <div class="mt-0.5">
-        <q-item-section v-if="type == -1">
-          <q-item-label class="-mb-0.5">{{ $t(msg) }}</q-item-label>
-          <q-item-label caption>{{ $t('clickToLearnMore') }}</q-item-label>
-        </q-item-section>
-
-        <q-item-section v-if="type == undefined">
-          <q-tooltip v-if="assignment!.length > 37">{{ msg.split('|')[1] }}</q-tooltip>
-
-          <q-item-label class="-mb-0.5">
-            {{ assignment!.length > 37 ? `${assignment!.substring(0, 39)}...` : assignment }}
-          </q-item-label>
-          <q-item-label caption>Due: {{ msg }}</q-item-label>
-        </q-item-section>
-
-        <q-item-section v-if="type == 1">
-          <q-item-label v-if="msg.split('|')[0] === 'Desc'" class="-mb-0.5">
-            {{ $t('assignment') + $t('directions') + $t('changed') }}
-          </q-item-label>
-          <q-item-label v-else class="-mb-0.5">
-            {{ $t(msg.split('|')[0].toLowerCase()) }}{{ $t('changed') }}: [ {{ msg.split('|')[1] }} →
-            {{ msg.split('|')[2] }} ]
-          </q-item-label>
-          <q-item-label caption>{{ $t('target') }}: {{ assignment }}</q-item-label>
-        </q-item-section>
-
-        <q-item-section v-if="type == 2">
-          <q-item-label class="-mb-0.5">{{ msg.split('|')[1] }}</q-item-label>
-          <q-item-label caption>
-            {{ $t('previousGrade') }}: {{ msg.split('|')[0] === ' ' ? 'None' : msg.split('|')[0] }}
-          </q-item-label>
-        </q-item-section>
+    <!-- *Mobile* -->
+    <div class="flex" v-else>
+      <div class="absolute left-2 mt-2">
+        <div v-if="type == -1" class="w-1 h-12 bg-red-600 mr-2"></div>
+        <div v-if="type == undefined" class="w-1 h-12 bg-pink-300 mr-2"></div>
+        <div v-if="type == 1" class="w-1 h-12 bg-cyan-300 mr-2"></div>
+        <div v-if="type == 2" class="w-1 h-12 bg-indigo-300 mr-2"></div>
       </div>
-    </q-item>
-    <q-btn flat @click="onDeleteMsg">
-      <q-icon name="close" color="red-10" />
-    </q-btn>
+
+      <q-item clickable class="flex-1 flex flex-col ml-1" @click="onNotificationClick">
+        <q-item-section>
+          <q-item-label class="text-[0.6rem]">
+            {{ course || $t('system') + $t('notification') }}
+            <span class="text-[0.55rem] text-gray-600">( {{ formatTime(created_at) }} )</span>
+          </q-item-label>
+        </q-item-section>
+
+        <div class="mt-0.5">
+          <q-item-section v-if="type == -1">
+            <q-item-label class="-mb-0.5">{{ $t(msg) }}</q-item-label>
+            <q-item-label caption>{{ $t('clickToLearnMore') }}</q-item-label>
+          </q-item-section>
+
+          <q-item-section v-if="type == undefined">
+            <q-tooltip v-if="assignment!.length > 37">{{ msg.split('|')[1] }}</q-tooltip>
+
+            <q-item-label class="-mb-0.5">
+              {{ assignment!.length > 37 ? `${assignment!.substring(0, 39)}...` : assignment }}
+            </q-item-label>
+            <q-item-label caption>Due: {{ msg }}</q-item-label>
+          </q-item-section>
+
+          <q-item-section v-if="type == 1">
+            <q-item-label v-if="msg.split('|')[0] === 'Desc'" class="-mb-0.5">
+              {{ $t('assignment') + $t('directions') + $t('changed') }}
+            </q-item-label>
+            <q-item-label v-else class="-mb-0.5">
+              {{ $t(msg.split('|')[0].toLowerCase()) }}{{ $t('changed') }}: [ {{ msg.split('|')[1] }} →
+              {{ msg.split('|')[2] }} ]
+            </q-item-label>
+            <q-item-label caption>{{ $t('target') }}: {{ assignment }}</q-item-label>
+          </q-item-section>
+
+          <q-item-section v-if="type == 2">
+            <q-item-label class="-mb-0.5">{{ msg.split('|')[1] }}</q-item-label>
+            <q-item-label caption>
+              {{ $t('previousGrade') }}: {{ msg.split('|')[0] === ' ' ? 'None' : msg.split('|')[0] }}
+            </q-item-label>
+          </q-item-section>
+        </div>
+      </q-item>
+      <q-btn flat @click="onDeleteMsg">
+        <q-icon name="close" color="red-10" />
+      </q-btn>
+    </div>
   </div>
 </template>
 
