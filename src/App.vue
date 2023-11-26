@@ -44,6 +44,10 @@ onMounted(() => {
 
 const startFetchOnInterval = async () => {
   while (true) {
+    if (store.fetchedAt === '') {
+      return;
+    }
+
     const timeToWait = 2100000 - (Date.now() - new Date(Number(store.fetchedAt)).getTime());
     if (timeToWait > 0) {
       await new Promise((resolve) => setTimeout(resolve, timeToWait));
@@ -53,7 +57,11 @@ const startFetchOnInterval = async () => {
   }
 };
 
-const fetchNotification = async (retry?: number, instant?: boolean) => {
+const fetchNotification = (retry?: number, instant?: boolean) => {
+  if (store.fetchedAt === '' && !instant) {
+    return;
+  }
+
   if (Date.now() - new Date(Number(store.fetchedAt)).getTime() < 1800000 && !instant) {
     return;
   }
@@ -62,8 +70,14 @@ const fetchNotification = async (retry?: number, instant?: boolean) => {
     if (retry > 3) {
       return;
     }
-    await new Promise((resolve) => setTimeout(resolve, 180000));
+    setTimeout(() => {
+      api
+        .get('/data/message')
+        .then((res) => store.updateNotifications(res.data.data.data))
+        .catch(() => fetchNotification(retry || 1));
+    }, 180000);
     retry++;
+    return;
   }
 
   api
