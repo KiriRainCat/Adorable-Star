@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { Notify } from 'quasar';
 import { useAppStore } from 'src/stores/app';
-import { useRouter } from 'vue-router';
 import { i18n } from './i18n';
+import { router } from 'src/router';
 
 // Create global axios instance
 const api = axios.create({
@@ -43,8 +43,7 @@ api.interceptors.response.use(
     switch (e.response.data.code) {
       case 401:
         localStorage.setItem('token', '');
-        const $router = useRouter();
-        $router.replace('/auth/login');
+        router.replace('/auth/login');
         break;
       case 400:
       case 500:

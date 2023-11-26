@@ -1,5 +1,5 @@
 import { route } from 'quasar/wrappers';
-import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
+import { Router, createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 
 import routes from './routes';
 
@@ -12,6 +12,8 @@ import routes from './routes';
  * with the Router instance.
  */
 
+let router: Router;
+
 export default route(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
@@ -19,7 +21,7 @@ export default route(function (/* { store, ssrContext } */) {
     ? createWebHistory
     : createWebHashHistory;
 
-  const Router = createRouter({
+  router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
     routes,
 
@@ -30,7 +32,7 @@ export default route(function (/* { store, ssrContext } */) {
   });
 
   // Global interceptor
-  Router.beforeEach((to, from, next) => {
+  router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('token');
     if (to.path.includes('doc')) {
       next();
@@ -55,5 +57,7 @@ export default route(function (/* { store, ssrContext } */) {
     next();
   });
 
-  return Router;
+  return router;
 });
+
+export { router };
