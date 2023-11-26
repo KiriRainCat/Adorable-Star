@@ -97,4 +97,7 @@ export default {
   参数错误: 'Parameter error',
   参数不得为空: 'Parameter cannot be empty',
   '服务器内部发生错误，请联系开发者': 'Internal server error, please contact the developer',
+  '需要用户添加 Jupiter 数据': 'User needs to add Jupiter data',
+  账号或密码错误: 'Incorrect username or password',
+  'jupiter 账号或密码错误': 'Jupiter account or password is incorrect',
 };
