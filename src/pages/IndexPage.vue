@@ -24,11 +24,11 @@
           </q-item-section>
           <img
             :src="img"
-            :class="(showReportCard ? 'opacity-100' : 'opacity-0') + ' transition-all duration-1000'"
+            :class="(showReportCard ? 'opacity-100' : 'opacity-0') + ' transition-all duration-1000 mb-4'"
             alt="Report Card"
           />
         </q-card>
-        <q-skeleton class="card mr-4 mb-4 h-[10.3rem]" v-else></q-skeleton>
+        <q-skeleton class="card mr-4 mb-4 h-[11.4rem]" v-else></q-skeleton>
         <q-card class="card mr-4 flex-1"></q-card>
       </div>
       <q-card class="card flex-1 mt-4 mr-4 sm:min-w-[24rem] min-h-[47.7rem]"></q-card>
