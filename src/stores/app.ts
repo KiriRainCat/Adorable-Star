@@ -16,6 +16,9 @@ export const useAppStore = defineStore('app', {
   getters: {
     getDateString(): string {
       const str = new Date(Number(this.fetchedAt)).toLocaleString();
+      if (str.startsWith('0001-') || this.fetchedAt.length == 0) {
+        return 'None';
+      }
       return `${str.substring(5, 11)} ${str.substring(11, 16)}`;
     },
   },
