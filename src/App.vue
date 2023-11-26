@@ -44,21 +44,17 @@ onMounted(() => {
 
 const startFetchOnInterval = async () => {
   while (true) {
-    if (store.fetchedAt === '') {
-      return;
-    }
-
     const timeToWait = 2100000 - (Date.now() - new Date(Number(store.fetchedAt)).getTime());
-    if (timeToWait > 0) {
+    if (timeToWait >= 0) {
       await new Promise((resolve) => setTimeout(resolve, timeToWait));
+      fetchNotification();
     }
-    fetchNotification();
     await new Promise((resolve) => setTimeout(resolve, 60000));
   }
 };
 
 const fetchNotification = (retry?: number, instant?: boolean) => {
-  if (store.fetchedAt === '' && !instant) {
+  if (localStorage.getItem('token')?.length == 0) {
     return;
   }
 
