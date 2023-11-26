@@ -31,6 +31,12 @@
       </q-card-section>
 
       <div v-if="assignment.title != undefined">
+        <q-card-section>
+          <q-item-label caption class="sm:text-[0.9rem] font-semibold">
+            {{ $t('due') }}: {{ formatTime(assignment.due) }}
+          </q-item-label>
+        </q-card-section>
+
         <q-card-section class="flex">
           <q-card class="w-fit h-fit">
             <q-btn noCaps flat @click="onUpdateStatus" class="max-sm:p-2 max-sm:text-[0.6rem]">
@@ -79,6 +85,8 @@ const $q = useQuasar();
 const $route = useRoute();
 const store = useAppStore();
 const { t } = useI18n();
+
+const formatTime = (raw: string) => `${raw.substring(5, 7)}/${raw.substring(8, 10)}`;
 
 const onUpdateStatus = () => {
   if (assignment.value.status) {
