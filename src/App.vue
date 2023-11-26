@@ -34,9 +34,15 @@ onMounted(() => {
     localStorage.setItem('courses', JSON.stringify(store.courses));
   };
 
-  // Add focus event listener for notification fetching
+  // Add event listeners for notification fetching and state changing
   fetchNotification(undefined, true);
-  window.addEventListener('focus', () => fetchNotification());
+  window.addEventListener('blur', () => {
+    store.focused = false;
+  });
+  window.addEventListener('focus', () => {
+    store.focused = true;
+    fetchNotification();
+  });
 
   // Start bg worker for fetching messages every 30 minutes
   startFetchOnInterval();

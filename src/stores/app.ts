@@ -8,6 +8,7 @@ const t = i18n.global.t;
 
 export const useAppStore = defineStore('app', {
   state: () => ({
+    focused: true,
     fetchedAt: '',
     gpa: '',
     notifications: new Array<Notification>(),
@@ -79,6 +80,23 @@ export const useAppStore = defineStore('app', {
               break;
           }
 
+          // Flash the title when the page is not focused
+          let interval: NodeJS.Timeout;
+          if (!this.focused) {
+            interval = setInterval(() => {
+              if (this.focused) {
+                document.title = '萌媛星';
+                clearInterval(interval);
+              }
+
+              if (document.title.includes('【')) {
+                document.title = '萌媛星';
+              } else {
+                document.title = `【 ${t('new')}${t('notification')} 】`;
+              }
+            }, 500);
+          }
+
           // Show non-auto-closable notification that display count of unread notifications
           Notify.create({
             type: 'warning',
@@ -89,6 +107,11 @@ export const useAppStore = defineStore('app', {
             ],
             timeout: 99999999999,
             message: t('haveUnreadNotification'),
+            onDismiss: () => {
+              // Stop the flashing title if any
+              clearInterval(interval);
+              document.title = '萌媛星';
+            },
           });
         } else {
           Notify.create({ type: 'warning', message: t('notifyPermissionRequired') });
