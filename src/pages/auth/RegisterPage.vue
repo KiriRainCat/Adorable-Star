@@ -24,7 +24,7 @@
             @click="sendValidationCode"
             :disable="cd != 0 || !RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/).test(email)"
           >
-            {{ $t('send') }}
+            {{ cd == 0 ? $t('send') : cd + 's' }}
           </q-btn>
         </div>
         <q-input
