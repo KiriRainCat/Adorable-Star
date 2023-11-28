@@ -108,4 +108,6 @@ export default {
   使用此邮箱的账户已经存在: 'An account with this email already exists',
   验证码不存在或过期: 'Verification code does not exist or has expired',
   验证码错误: 'Incorrect verification code',
+  '验证码仍在5分钟有效期内，没小于2分钟禁止重发':
+    'The verification code is still valid within a 5-minute period (no resend allowed when code still valid for more than 2 minutes)',
 };
