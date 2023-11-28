@@ -25,19 +25,16 @@ onMounted(() => {
   store.notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
   store.courses = JSON.parse(localStorage.getItem('courses') || '[]');
 
-  // Store data to local storage on page close
-  onbeforeunload = () => {
-    window.removeEventListener('focus', () => fetchNotification);
-    localStorage.setItem('gpa', store.gpa);
-    localStorage.setItem('fetchedAt', store.fetchedAt);
-    localStorage.setItem('notifications', JSON.stringify(store.notifications));
-    localStorage.setItem('courses', JSON.stringify(store.courses));
-  };
-
   // Add event listeners for notification fetching and state changing
   fetchNotification(undefined, true);
   window.addEventListener('blur', () => {
     store.focused = false;
+
+    // Store data to local storage on page blur
+    localStorage.setItem('gpa', store.gpa);
+    localStorage.setItem('fetchedAt', store.fetchedAt);
+    localStorage.setItem('notifications', JSON.stringify(store.notifications));
+    localStorage.setItem('courses', JSON.stringify(store.courses));
   });
   window.addEventListener('focus', () => {
     store.focused = true;
