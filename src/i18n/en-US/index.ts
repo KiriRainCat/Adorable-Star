@@ -56,7 +56,7 @@ export default {
   notification: 'Notification',
   course: 'Course',
   assignment: 'Assignment ',
-  new: 'New',
+  new: 'New ',
   clickTo: 'Click to ',
   show: 'Show ',
   hide: 'Hide ',
