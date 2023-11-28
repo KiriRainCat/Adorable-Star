@@ -52,7 +52,12 @@
           ]"
         />
         <div class="cursor-pointer text-blue-500" @click="$router.push('/auth/login')">{{ $t('haveAccount') }}</div>
-        <q-btn class="mt-6 px-8 py-2 from-pink-200 to-cyan-200 bg-gradient-to-tr font-bold text-m" noCaps type="submit">
+        <q-btn
+          class="mt-6 px-8 py-2 from-pink-200 to-cyan-200 bg-gradient-to-tr font-bold text-m"
+          noCaps
+          type="submit"
+          :disable="submitting"
+        >
           {{ $t('register') }}
         </q-btn>
       </q-form>
@@ -96,7 +101,10 @@ const sendValidationCode = () => {
     })
     .catch(() => (cd.value = 0));
 };
+
+const submitting = ref(false);
 const register = () => {
+  submitting.value = true;
   api
     .post('/user/register', {
       email: email.value,
@@ -108,7 +116,8 @@ const register = () => {
       $q.notify({ type: 'positive', message: t('register') + t('success') + ' ' + t('pleaseLogin') });
       $router.replace('/auth/login');
     })
-    .catch(() => null);
+    .catch(() => null)
+    .finally(() => (submitting.value = false));
 };
 </script>
 
