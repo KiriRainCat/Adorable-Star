@@ -93,6 +93,11 @@ export default {
   newUserMsg:
     'As the account has just been created, the page currently has no data (data will refresh in approximately 5 minutes)',
   fetchData: 'Fetch Data Manually',
+  validationCode: 'Validation Code',
+  send: 'Send',
+  equalTo: 'Equal to ',
+  success: ' Success',
+  pleaseLogin: 'Please log in',
   旧密码不匹配: 'Old password does not match',
   参数错误: 'Parameter error',
   参数不得为空: 'Parameter cannot be empty',
@@ -100,4 +105,7 @@ export default {
   '需要用户添加 Jupiter 数据': 'User needs to add Jupiter data',
   账号或密码错误: 'Incorrect username or password',
   'jupiter 账号或密码错误': 'Jupiter account or password is incorrect',
+  使用此邮箱的账户已经存在: 'An account with this email already exists',
+  验证码不存在或过期: 'Verification code does not exist or has expired',
+  验证码错误: 'Incorrect verification code',
 };
