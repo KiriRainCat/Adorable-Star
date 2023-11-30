@@ -35,6 +35,9 @@ export const useAppStore = defineStore('app', {
         return true;
       });
 
+      // Update the notifications
+      this.notifications = notifications;
+
       // Notify user via system notification
       newNotifications.forEach((notification) => {
         if (window.Notification.permission === 'granted') {
@@ -116,12 +119,10 @@ export const useAppStore = defineStore('app', {
             },
           });
         } else {
-          Notify.create({ type: 'warning', message: t('notifyPermissionRequired') });
+          window.alert(t('notifyPermissionRequired'));
           window.Notification.requestPermission(() => null);
         }
       });
-
-      this.notifications = notifications;
     },
   },
 });
