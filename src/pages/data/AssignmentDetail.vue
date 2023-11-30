@@ -86,7 +86,12 @@ const $route = useRoute();
 const store = useAppStore();
 const { t } = useI18n();
 
-const formatTime = (raw: string) => `${raw.substring(5, 7)}/${raw.substring(8, 10)}`;
+const formatTime = (raw: string) => {
+  if (raw.substring(0, 4) === '0001') {
+    return 'Future';
+  }
+  return `${raw.substring(5, 7)}/${raw.substring(8, 10)}`;
+};
 
 const onUpdateStatus = () => {
   if (assignment.value.status) {
