@@ -87,6 +87,7 @@ export const useAppStore = defineStore('app', {
               if (this.focused) {
                 document.title = '萌媛星';
                 clearInterval(interval);
+                document.title = '萌媛星';
               }
 
               if (document.title.includes('【')) {
@@ -109,6 +110,7 @@ export const useAppStore = defineStore('app', {
             message: t('haveUnreadNotification'),
             onDismiss: () => {
               // Stop the flashing title if any
+              document.title = '萌媛星';
               clearInterval(interval);
               document.title = '萌媛星';
             },
