@@ -41,6 +41,13 @@ api.interceptors.response.use(
   },
   (e) => {
     switch (e.response.data.code) {
+      case 404:
+      case 502:
+        Notify.create({
+          type: 'negative',
+          message: i18n.global.t('serverOffline'),
+        });
+        break;
       case 401:
         localStorage.setItem('token', '');
         router.replace('/auth/login');
