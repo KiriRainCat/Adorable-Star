@@ -11,6 +11,7 @@ import { onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAppStore } from './stores/app';
 import { api } from './boot/axios';
+import { onBeforeUnmount } from 'vue';
 
 const i18n = useI18n();
 const store = useAppStore();
@@ -24,6 +25,14 @@ onMounted(() => {
   store.fetchedAt = localStorage.getItem('fetchedAt') || '';
   store.notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
   store.courses = JSON.parse(localStorage.getItem('courses') || '[]');
+
+  // Store data to local storage on page close
+  onBeforeUnmount(() => {
+    localStorage.setItem('gpa', store.gpa);
+    localStorage.setItem('fetchedAt', store.fetchedAt);
+    localStorage.setItem('notifications', JSON.stringify(store.notifications));
+    localStorage.setItem('courses', JSON.stringify(store.courses));
+  });
 
   // Add event listeners for notification fetching and state changing
   fetchNotification(undefined, true);
