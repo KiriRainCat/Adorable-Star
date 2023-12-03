@@ -9,6 +9,11 @@ body {
   overflow: hidden;
 }
 
+// Add blue color and underline to all href
+a {
+  @apply text-blue-500 underline;
+}
+
 // Ground glass effect (translucent)
 .glass {
   backdrop-filter: blur(1px);
