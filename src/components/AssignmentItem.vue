@@ -17,7 +17,7 @@
       </span>
     </q-item>
 
-    <q-btn v-if="$q.screen.gt.sm" flat class="text-cyan-950" icon="book" @click="$emit('update')">
+    <q-btn v-if="$q.screen.gt.xs" flat class="text-cyan-950" icon="book" @click="$emit('update')">
       <q-tooltip>{{ $t('changeStatusTo') }}{{ assignment.status ? $t('incomplete') : $t('complete') }}</q-tooltip>
     </q-btn>
   </q-card>

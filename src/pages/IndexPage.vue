@@ -30,7 +30,7 @@
         </q-card>
         <q-card class="card mr-4 flex-1"></q-card>
       </div>
-      <q-card class="card flex-1 mt-4 mr-4 sm:min-w-[24rem] min-h-[47.7rem]"></q-card>
+      <q-card class="card flex-1 mt-4 mr-4 sm:min-w-[21rem] min-h-[47.7rem]"></q-card>
     </q-page>
   </q-scroll-area>
 </template>

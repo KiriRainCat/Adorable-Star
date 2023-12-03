@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- *Desktop* -->
-    <div class="flex" v-if="$q.screen.gt.sm">
+    <div class="flex" v-if="$q.screen.gt.xs">
       <q-item clickable class="flex flex-1" @click="onNotificationClick">
         <span v-if="type == -1" class="w-1 h-8 bg-red-600 mr-2"></span>
         <span v-if="type == undefined" class="w-1 h-8 bg-pink-300 mr-2"></span>

@@ -21,7 +21,7 @@
           </q-item-section>
         </span>
 
-        <q-btn-dropdown :rounded="!$q.screen.gt.sm" :dense="!$q.screen.gt.sm" dropdown-icon="language" auto-close>
+        <q-btn-dropdown :rounded="!$q.screen.gt.xs" :dense="!$q.screen.gt.xs" dropdown-icon="language" auto-close>
           <div v-for="lang in langs" :key="lang[0]">
             <q-btn flat noCaps class="w-full" @click="changeLocale($i18n, lang[1])">{{ lang[0] }}</q-btn>
           </div>
