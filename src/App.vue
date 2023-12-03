@@ -17,6 +17,9 @@ const i18n = useI18n();
 const store = useAppStore();
 
 onMounted(() => {
+  if (window.Notification.permission !== 'granted') {
+    window.alert(i18n.t('notifyPermissionRequired'));
+  }
   // Locale
   i18n.locale.value = localStorage.getItem('locale') || navigator.language;
 

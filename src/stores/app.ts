@@ -120,7 +120,6 @@ export const useAppStore = defineStore('app', {
             },
           });
         } else {
-          window.alert(t('notifyPermissionRequired'));
           window.Notification.requestPermission(() => null);
         }
       });
