@@ -22,10 +22,10 @@
           </q-item-section>
 
           <q-item-section v-if="type == undefined">
-            <q-tooltip v-if="assignment!.length > 37">{{ msg.split('|')[1] }}</q-tooltip>
+            <q-tooltip v-if="assignment!.length > 36">{{ assignment }}</q-tooltip>
 
             <q-item-label>
-              {{ assignment!.length > 37 ? `${assignment!.substring(0, 39)}...` : assignment }}
+              {{ assignment!.length > 36 ? `${assignment!.substring(0, 36)}...` : assignment }}
             </q-item-label>
             <q-item-label caption>Due: {{ msg }}</q-item-label>
           </q-item-section>
