@@ -20,4 +20,4 @@ export const changeLocale = (i18n: ExportedGlobalComposer, locale: string) => {
   localStorage.setItem('locale', locale);
 };
 
-export const version = 'v0.1.0';
+export const version = 'v0.5.0';
