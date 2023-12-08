@@ -2,7 +2,10 @@
   <q-scroll-area class="w-[100vw] h-[93.3vh]" :bar-style="{ opacity: '0' }" :thumb-style="{ opacity: '0' }">
     <q-page class="flex pl-4 pb-4 max-sm:pb-32">
       <q-card class="card flex-1 mt-4 mr-4 p-1 min-w-[32rem] max-sm:min-w-[16rem] min-h-[47.7rem]">
-        <div class="text-center text-xl font-bold py-2">{{ $t('notification') + $t('message') }}</div>
+        <div class="text-center text-xl font-bold py-4">{{ $t('notification') + $t('message') }}</div>
+        <q-btn class="absolute top-2.5 right-3" flat round color="red" icon="delete_sweep" @click="onEmptyingMsg">
+          <q-tooltip>{{ $t('deleteAll') + $t('notification') + $t('message') }}</q-tooltip>
+        </q-btn>
         <q-scroll-area class="h-[92%] w-full">
           <q-infinite-scroll>
             <div v-if="notifications.length < 1" class="text-center">{{ $t('noNotification') }}</div>
@@ -37,17 +40,33 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
+import { useQuasar } from 'quasar';
+import { useI18n } from 'vue-i18n';
 import { api } from 'src/boot/axios';
 import NotificationItemVue from 'src/components/NotificationItem.vue';
 import { useAppStore } from 'src/stores/app';
 import { ref } from 'vue';
 import { onBeforeMount } from 'vue';
 
+const { t } = useI18n();
+const $q = useQuasar();
 const store = useAppStore();
 const { notifications } = storeToRefs(store);
 
 const img = ref('');
 const showReportCard = ref(false);
+
+const onEmptyingMsg = () => {
+  $q.dialog({
+    title: `<span class="text-lg">${t('deleteAll')}${t('notification')}${t('message')}?<span>`,
+    focus: 'none',
+    html: true,
+    ok: { label: t('confirm'), color: 'red' },
+  }).onOk(() => {
+    store.updateNotifications([]);
+    api.delete('/data/message').catch(() => null);
+  });
+};
 
 onBeforeMount(() => {
   api
