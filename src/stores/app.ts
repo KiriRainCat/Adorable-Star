@@ -39,6 +39,24 @@ export const useAppStore = defineStore('app', {
       // Update the notifications
       this.notifications = notifications;
 
+      // Flash the title when the page is not focused
+      let interval: NodeJS.Timeout;
+      if (!this.focused && newNotifications.length > 0) {
+        interval = setInterval(() => {
+          if (document.title.includes('【')) {
+            document.title = '萌媛星';
+          } else {
+            document.title = `【 ${t('new')}${t('notification')} 】`;
+          }
+        }, 500);
+
+        // Stop flashing when tab focused
+        window.addEventListener('focus', () => {
+          clearInterval(interval);
+          document.title = '萌媛星';
+        });
+      }
+
       // Notify user via system notification
       newNotifications.forEach((notification) => {
         if (window.Notification.permission === 'granted') {
@@ -84,24 +102,6 @@ export const useAppStore = defineStore('app', {
               break;
           }
 
-          // Flash the title when the page is not focused
-          let interval: NodeJS.Timeout;
-          if (!this.focused) {
-            interval = setInterval(() => {
-              if (this.focused) {
-                document.title = '萌媛星';
-                clearInterval(interval);
-                document.title = '萌媛星';
-              }
-
-              if (document.title.includes('【')) {
-                document.title = '萌媛星';
-              } else {
-                document.title = `【 ${t('new')}${t('notification')} 】`;
-              }
-            }, 500);
-          }
-
           // Show non-auto-closable notification that display count of unread notifications
           Notify.create({
             type: 'warning',
@@ -114,7 +114,6 @@ export const useAppStore = defineStore('app', {
             message: t('haveUnreadNotification'),
             onDismiss: () => {
               // Stop the flashing title if any
-              document.title = '萌媛星';
               clearInterval(interval);
               document.title = '萌媛星';
             },
