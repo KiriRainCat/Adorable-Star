@@ -20,10 +20,11 @@
       </q-card>
       <div class="sm:min-w-[28rem] max-sm:min-w-full mt-4 flex flex-col min-h-[47.7rem]">
         <q-card class="card mr-4 mb-4 cursor-pointer" @click="showReportCard = !showReportCard" v-if="img !== ''">
-          <q-tooltip>{{ (showReportCard ? $t('hide') : $t('show')) + $t('reportCard') }}</q-tooltip>
           <q-item-section class="absolute top-4 left-4" v-if="!showReportCard">
             <q-item-label class="text-lg font-bold">{{ $t('reportCard') }}</q-item-label>
-            <q-item-label caption>{{ $t('clickTo') + $t('show') + $t('reportCard') }}</q-item-label>
+            <q-item-label caption>
+              {{ `${$t('clickTo')} ${$t('show')} / ${$t('hide')} ${$t('reportCard')}` }}
+            </q-item-label>
           </q-item-section>
           <img
             :src="img"
@@ -31,6 +32,7 @@
             alt="Report Card"
           />
         </q-card>
+        <q-skeleton class="card mr-4 mb-4 h-44" v-else />
         <q-card class="card mr-4 flex-1"></q-card>
       </div>
       <q-card class="card flex-1 mt-4 mr-4 sm:min-w-[21rem] min-h-[47.7rem]"></q-card>
