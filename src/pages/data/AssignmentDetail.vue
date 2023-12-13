@@ -55,8 +55,13 @@
             </q-btn>
           </q-card>
           <q-card class="ml-4 max-sm:ml-2">
-            <q-btn noCaps flat @click="onFetchDesc" class="max-sm:p-2 max-sm:text-[0.6rem]">
+            <q-btn noCaps flat @click="() => onFetchDesc()" class="max-sm:p-2 max-sm:text-[0.6rem]">
               {{ $t('fetchAssignmentDesc') }}
+            </q-btn>
+          </q-card>
+          <q-card class="ml-4 max-sm:ml-2" v-if="status >= 200">
+            <q-btn noCaps flat @click="() => onFetchDesc(true)" class="max-sm:p-2 max-sm:text-[0.6rem]">
+              {{ $t('force') + $t('fetchAssignmentDesc') }}
             </q-btn>
           </q-card>
         </q-card-section>
@@ -86,6 +91,8 @@ const $route = useRoute();
 const store = useAppStore();
 const { t } = useI18n();
 
+const status = Number.parseInt(localStorage.getItem('status')!);
+
 const formatTime = (raw: string) => {
   if (raw.substring(0, 4) === '0001') {
     return 'Future';
@@ -103,12 +110,19 @@ const onUpdateStatus = () => {
   }
 };
 
-const onFetchDesc = () => {
+const onFetchDesc = (force?: boolean) => {
   $q.notify({ type: 'info', message: t('fetchingInProgress') });
-  api
-    .post(`data/fetch-desc/${assignment.value.id}`)
-    .then(() => updateAssignment())
-    .catch(() => setTimeout(() => updateAssignment(), 180000));
+  if (force) {
+    api
+      .post(`data/fetch-desc/${assignment.value.id}?force=true`)
+      .then(() => updateAssignment())
+      .catch(() => setTimeout(() => updateAssignment(), 180000));
+  } else {
+    api
+      .post(`data/fetch-desc/${assignment.value.id}`)
+      .then(() => updateAssignment())
+      .catch(() => setTimeout(() => updateAssignment(), 180000));
+  }
 };
 
 const assignment = ref(<Assignment>{});

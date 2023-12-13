@@ -98,6 +98,7 @@ export default {
   pleaseLogin: '请登录',
   serverOffline: '网络或服务器离线 (请联系开发者)',
   deleteAll: '清空所有',
+  force: '强制',
   旧密码不匹配: '原密码不匹配',
   参数错误: '参数错误',
   参数不得为空: '参数不得为空',

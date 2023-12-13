@@ -116,7 +116,7 @@ const navItems: NavItemProps[] = [
 const leftDrawerOpen = ref(false);
 
 const ifAdmin = () => {
-  if (localStorage.getItem('status') == '900') {
+  if (Number.parseInt(localStorage.getItem('status')!) >= 900) {
     navItems.push({
       title: 'adminPage',
       desc: 'adminPageDesc',

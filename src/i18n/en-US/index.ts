@@ -100,6 +100,7 @@ export default {
   pleaseLogin: 'Please log in',
   serverOffline: 'Network or server offline (Please contact the developer)',
   deleteAll: 'Delete All ',
+  force: 'Force ',
   旧密码不匹配: 'Old password does not match',
   参数错误: 'Parameter error',
   参数不得为空: 'Parameter cannot be empty',
