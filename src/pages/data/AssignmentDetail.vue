@@ -51,7 +51,7 @@
             </q-btn>
           </q-card>
 
-          <q-card class="ml-4 max-sm:ml-2" v-if="assignment.turn_in_able">
+          <q-card class="ml-4 max-sm:ml-2" v-if="assignment.turn_in_able == 1">
             <q-tooltip>{{ $t('turnIn') }}</q-tooltip>
             <q-btn-dropdown
               dropdown-icon="file_upload"
@@ -94,11 +94,18 @@
           <div class="max-sm:text-xs" v-html="assignment.desc || $t('none')" />
         </q-card-section>
 
-        <q-card-section>
+        <q-card-section v-if="assignment.turn_in_able != -1">
           <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('uploaded') }}:</div>
+          <q-card v-if="assignment.turn_in_list?.length == 0 && assignment.turn_in_able" class="max-w-md mt-2 p-2">{{ $t('none') }}</q-card>
+          <q-card v-if="assignment.turn_in_list?.length == undefined && assignment.turn_in_able == undefined" class="max-w-md mt-2 p-2">
+            <q-btn flat noCaps icon="sync_problem" @click="() => onFetchDetail(true)" class="max-sm:p-2 max-sm:text-[0.6rem]">
+              {{ $t('mayRequireForcedDataRetrieval') }}
+            </q-btn>
+          </q-card>
+
           <q-card v-for="(item, idx) in assignment.turn_in_list" :key="idx" class="max-w-md mt-2">
-            <q-tooltip>{{ $t('unSubmit') }}</q-tooltip>
-            <q-btn noCaps flat class="max-sm:p-2 max-sm:text-[0.6rem] w-full" align="left">
+            <q-tooltip>{{ $t('clickTo') + $t('unSubmit') }}</q-tooltip>
+            <q-btn noCaps flat class="max-sm:p-2 max-sm:text-[0.6rem] w-full" align="left" @click="() => onUnSubmit(assignment, idx)">
               {{ item }}
             </q-btn>
           </q-card>
@@ -194,6 +201,22 @@ const onTurnIn = (turnInType: string) => {
   } else {
     $q.dialog({ component: TextEditor, componentProps: { id: assignment.value.id, refreshFn: () => fetchAssignment(true) } });
   }
+};
+
+const onUnSubmit = (a: Assignment, i: number) => {
+  $q.dialog({
+    title: `${t('confirm') + t('unSubmit')}?`,
+    focus: 'none',
+    html: true,
+    cancel: { label: t('cancel'), color: 'grey', noCaps: true },
+    ok: { label: t('confirm'), color: 'red', noCaps: true },
+  }).onOk(() => {
+    const val = assignment.value.turn_in_list!.splice(i, 1);
+    api
+      .post(`/data/assignment/uploaded/${a.id}`, { name: val[0] })
+      .then(() => fetchAssignment(true))
+      .catch(() => null);
+  });
 };
 
 onBeforeMount(() => fetchAssignment(true));

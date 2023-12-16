@@ -32,7 +32,7 @@ export interface Assignment {
   title: string;
   score?: string;
   desc?: string;
-  turn_in_able?: boolean;
+  turn_in_able?: number;
   turn_in_types?: string[];
   turn_in_list?: string[];
 }

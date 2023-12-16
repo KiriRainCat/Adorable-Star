@@ -63,6 +63,7 @@ const onEmptyingMsg = () => {
     title: `<span class="text-lg">${t('deleteAll')}${t('notification')}${t('message')}?<span>`,
     focus: 'none',
     html: true,
+    cancel: { label: t('cancel'), color: 'grey', noCaps: true },
     ok: { label: t('confirm'), color: 'red', noCaps: true },
   }).onOk(() => {
     store.updateNotifications([]);

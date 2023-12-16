@@ -16,8 +16,8 @@
           />
         </div>
       </q-card>
-      <q-btn class="mt-4 mr-3" @click="() => uploaderRef.upload()" color="green" noCaps>{{ $t('upload') }}</q-btn>
-      <q-btn class="mt-4" @click="onDialogOK" color="grey" noCaps>{{ $t('cancel') }}</q-btn>
+      <q-btn class="mt-4 mr-3" @click="onDialogOK" color="grey" noCaps>{{ $t('cancel') }}</q-btn>
+      <q-btn class="mt-4" @click="() => uploaderRef.upload()" color="green" noCaps>{{ $t('upload') }}</q-btn>
     </q-card>
   </q-dialog>
 </template>

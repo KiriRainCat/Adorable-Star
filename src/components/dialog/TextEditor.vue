@@ -8,8 +8,8 @@
           <q-editor max-height="64vh" height="48vh" v-model="text" :toolbar="[['left'], ['undo', 'redo']]" />
         </div>
       </q-card>
-      <q-btn class="mt-4 mr-3" @click="onSubmit" color="green" noCaps>{{ $t('upload') }}</q-btn>
-      <q-btn class="mt-4" @click="onDialogOK" color="grey" noCaps>{{ $t('cancel') }}</q-btn>
+      <q-btn class="mt-4 mr-3" @click="onDialogOK" color="grey" noCaps>{{ $t('cancel') }}</q-btn>
+      <q-btn class="mt-4" @click="onSubmit" color="green" noCaps>{{ $t('upload') }}</q-btn>
     </q-card>
   </q-dialog>
 </template>

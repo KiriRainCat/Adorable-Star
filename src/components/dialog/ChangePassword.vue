@@ -24,6 +24,7 @@
             (val) => val == newPassword || t('passwordShouldBeEqual'),
           ]"
         />
+        <q-btn class="mt-4 mr-3" @click="onDialogOK" color="grey" noCaps>{{ $t('cancel') }}</q-btn>
         <q-btn class="mt-4" type="submit" primary :loading="loading">{{ $t('confirm') }}</q-btn>
       </q-form>
     </q-card>
