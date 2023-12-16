@@ -80,7 +80,7 @@ import { storeToRefs } from 'pinia';
 import { onBeforeMount } from 'vue';
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
-import ChangePassword from 'src/components/ChangePassword.vue';
+import ChangePassword from 'src/components/dialog/ChangePassword.vue';
 import { api } from 'src/boot/axios';
 
 const $q = useQuasar();

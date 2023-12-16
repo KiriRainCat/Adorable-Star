@@ -32,17 +32,13 @@
 
       <div v-if="assignment.title != undefined">
         <q-card-section>
-          <q-item-label caption class="sm:text-[0.9rem] font-semibold">
-            {{ $t('due') }}: {{ formatTime(assignment.due) }}
-          </q-item-label>
+          <q-item-label caption class="sm:text-[0.9rem] font-semibold">{{ $t('due') }}: {{ formatTime(assignment.due) }}</q-item-label>
         </q-card-section>
 
         <q-card-section class="flex">
           <q-card class="w-fit h-fit">
             <q-btn noCaps flat @click="onUpdateStatus" class="max-sm:p-2 max-sm:text-[0.6rem]">
-              <q-tooltip>
-                {{ $t('changeStatusTo') }}{{ assignment.status ? $t('incomplete') : $t('complete') }}
-              </q-tooltip>
+              <q-tooltip>{{ $t('changeStatusTo') }}{{ assignment.status ? $t('incomplete') : $t('complete') }}</q-tooltip>
 
               <div v-if="assignment.status == undefined" class="flex items-center">
                 <div class="w-3 h-3 bg-pink-300 rounded-full mr-2" />
@@ -54,14 +50,41 @@
               </div>
             </q-btn>
           </q-card>
+
+          <q-card class="ml-4 max-sm:ml-2" v-if="assignment.turn_in_able">
+            <q-tooltip>{{ $t('turnIn') }}</q-tooltip>
+            <q-btn-dropdown
+              dropdown-icon="file_upload"
+              no-icon-animation
+              flat
+              auto-close
+              :menu-offset="[40, 80]"
+              menu-anchor="top end"
+              color="teal"
+              @click="null"
+              class="max-sm:p-2 max-sm:text-[0.6rem]"
+            >
+              <div class="flex flex-col">
+                <q-btn flat noCaps v-for="(turnInType, idx) in assignment.turn_in_types" :key="idx" @click="() => onTurnIn(turnInType)">
+                  {{ turnInType }}
+                </q-btn>
+              </div>
+            </q-btn-dropdown>
+          </q-card>
+
           <q-card class="ml-4 max-sm:ml-2">
-            <q-btn noCaps flat @click="() => onFetchDesc()" class="max-sm:p-2 max-sm:text-[0.6rem]">
-              {{ $t('fetchAssignmentDesc') }}
+            <q-btn flat icon="refresh" @click="() => onFetchDetail()" class="max-sm:p-2 max-sm:text-[0.6rem]">
+              <q-tooltip>
+                {{ $t('fetchAssignmentDetail') }}
+              </q-tooltip>
             </q-btn>
           </q-card>
+
           <q-card class="ml-4 max-sm:ml-2" v-if="status >= 200">
-            <q-btn noCaps flat @click="() => onFetchDesc(true)" class="max-sm:p-2 max-sm:text-[0.6rem]">
-              {{ $t('force') + $t('fetchAssignmentDesc') }}
+            <q-btn flat icon="sync_problem" @click="() => onFetchDetail(true)" class="max-sm:p-2 max-sm:text-[0.6rem]">
+              <q-tooltip>
+                {{ $t('force') + $t('fetchAssignmentDetail') }}
+              </q-tooltip>
             </q-btn>
           </q-card>
         </q-card-section>
@@ -69,6 +92,16 @@
         <q-card-section>
           <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('directions') }}:</div>
           <div class="max-sm:text-xs" v-html="assignment.desc || $t('none')" />
+        </q-card-section>
+
+        <q-card-section>
+          <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('uploaded') }}:</div>
+          <q-card v-for="(item, idx) in assignment.turn_in_list" :key="idx" class="max-w-md mt-2">
+            <q-tooltip>{{ $t('unSubmit') }}</q-tooltip>
+            <q-btn noCaps flat class="max-sm:p-2 max-sm:text-[0.6rem] w-full" align="left">
+              {{ item }}
+            </q-btn>
+          </q-card>
         </q-card-section>
       </div>
     </q-card>
@@ -79,6 +112,8 @@
 import { useQuasar } from 'quasar';
 import { api } from 'src/boot/axios';
 import { Assignment } from 'src/components/AssignmentItem.vue';
+import FileUploader from 'src/components/dialog/FileUploader.vue';
+import TextEditor from 'src/components/dialog/TextEditor.vue';
 import { useAppStore } from 'src/stores/app';
 import { onBeforeMount } from 'vue';
 import { onBeforeUnmount } from 'vue';
@@ -110,13 +145,15 @@ const onUpdateStatus = () => {
   }
 };
 
-const onFetchDesc = (force?: boolean) => {
+const onFetchDetail = (force?: boolean) => {
   $q.notify({ type: 'info', message: t('fetchingInProgress') });
   if (force) {
+    $q.loading.show();
     api
       .post(`data/fetch-desc/${assignment.value.id}?force=true`)
       .then(() => updateAssignment())
-      .catch(() => setTimeout(() => updateAssignment(), 180000));
+      .catch(() => setTimeout(() => updateAssignment(), 180000))
+      .finally(() => $q.loading.hide());
   } else {
     api
       .post(`data/fetch-desc/${assignment.value.id}`)
@@ -149,6 +186,14 @@ const updateAssignment = () => {
     .catch(() => null);
 
   $q.notify({ type: 'positive', message: t('fetchSuccess') });
+};
+
+const onTurnIn = (turnInType: string) => {
+  if (turnInType === 'Files') {
+    $q.dialog({ component: FileUploader, componentProps: { id: assignment.value.id, refreshFn: () => fetchAssignment(true) } });
+  } else {
+    $q.dialog({ component: TextEditor, componentProps: { id: assignment.value.id, refreshFn: () => fetchAssignment(true) } });
+  }
 };
 
 onBeforeMount(() => fetchAssignment(true));
