@@ -3,11 +3,7 @@
     <q-card class="bg-[rgba(255,255,255,0.65)] w-[28rem] h-[30rem] rounded-xl">
       <q-form @submit="onSubmit" greedy class="px-12 py-8 text-center mt-[3.8rem]">
         <div class="text-3xl mb-8 font-semibold">{{ $t('loginDesc') }}</div>
-        <q-input
-          v-model="name"
-          :label="$t('usernameOrEmail')"
-          :rules="[(val) => (val !== '' && val !== null) || `${$t('noEmptyField')}`]"
-        >
+        <q-input v-model="name" :label="$t('usernameOrEmail')" :rules="[(val) => (val !== '' && val !== null) || `${$t('noEmptyField')}`]">
           <template #prepend>
             <q-icon name="person" />
           </template>
@@ -64,6 +60,10 @@ const onSubmit = () => {
     .then((res) => {
       localStorage.setItem('token', res.data.data.split('|')[0]);
       localStorage.setItem('status', res.data.data.split('|')[1]);
+      if (res.data.data.split('|')[2] === 'true') {
+        api.post('/data/assignment/fetch').catch(() => null);
+      }
+
       $q.notify({
         type: 'positive',
         message: t('loginSuccess'),
