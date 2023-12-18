@@ -30,7 +30,7 @@
         </div>
       </q-card-section>
 
-      <div v-if="assignment.title != undefined">
+      <div v-if="assignment.title != undefined" class="h-full">
         <q-card-section>
           <q-item-label caption class="sm:text-[0.9rem] font-semibold">{{ $t('due') }}: {{ formatTime(assignment.due) }}</q-item-label>
         </q-card-section>
@@ -89,27 +89,37 @@
           </q-card>
         </q-card-section>
 
-        <q-card-section>
-          <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('directions') }}:</div>
-          <div class="max-sm:text-xs" v-html="assignment.desc || $t('none')" />
-        </q-card-section>
+        <q-scroll-area class="h-[72%]" :bar-style="{ width: '4px' }" :thumb-style="{ width: '4px' }">
+          <q-card-section v-if="assignment.feed_back != undefined">
+            <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('feedback') }}:</div>
+            <div class="max-sm:text-xs">{{ assignment.feed_back }}</div>
+            <!-- TODO: Add Momentum Image Fetch -->
+          </q-card-section>
 
-        <q-card-section v-if="assignment.turn_in_able != -1">
-          <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('uploaded') }}:</div>
-          <q-card v-if="assignment.turn_in_list?.length == 0 && assignment.turn_in_able" class="max-w-md mt-2 p-2">{{ $t('none') }}</q-card>
-          <q-card v-if="assignment.turn_in_list?.length == undefined && assignment.turn_in_able == undefined" class="max-w-md mt-2 p-2">
-            <q-btn flat noCaps icon="sync_problem" @click="() => onFetchDetail(true)" class="max-sm:p-2 max-sm:text-[0.6rem]">
-              {{ $t('mayRequireForcedDataRetrieval') }}
-            </q-btn>
-          </q-card>
+          <q-card-section>
+            <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('directions') }}:</div>
+            <div class="max-sm:text-xs" v-html="assignment.desc || $t('none')" />
+          </q-card-section>
 
-          <q-card v-for="(item, idx) in assignment.turn_in_list" :key="idx" class="max-w-md mt-2">
-            <q-tooltip>{{ $t('clickTo') + $t('unSubmit') }}</q-tooltip>
-            <q-btn noCaps flat class="max-sm:p-2 max-sm:text-[0.6rem] w-full" align="left" @click="() => onUnSubmit(assignment, idx)">
-              {{ item }}
-            </q-btn>
-          </q-card>
-        </q-card-section>
+          <q-card-section v-if="assignment.turn_in_able != -1">
+            <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('uploaded') }}:</div>
+            <q-card v-if="assignment.turn_in_list?.length == 0 && assignment.turn_in_able" class="max-w-md mt-2 p-2">
+              {{ $t('none') }}
+            </q-card>
+            <q-card v-if="assignment.turn_in_list?.length == undefined && assignment.turn_in_able == undefined" class="max-w-md mt-2 p-2">
+              <q-btn flat noCaps icon="sync_problem" @click="() => onFetchDetail(true)" class="max-sm:p-2 max-sm:text-[0.6rem]">
+                {{ $t('mayRequireForcedDataRetrieval') }}
+              </q-btn>
+            </q-card>
+
+            <q-card v-for="(item, idx) in assignment.turn_in_list" :key="idx" class="max-w-md mt-2">
+              <q-tooltip>{{ $t('clickTo') + $t('unSubmit') }}</q-tooltip>
+              <q-btn noCaps flat class="max-sm:p-2 max-sm:text-[0.6rem] w-full" align="left" @click="() => onUnSubmit(assignment, idx)">
+                {{ item }}
+              </q-btn>
+            </q-card>
+          </q-card-section>
+        </q-scroll-area>
       </div>
     </q-card>
   </q-page>

@@ -35,6 +35,7 @@ export interface Assignment {
   turn_in_able?: number;
   turn_in_types?: string[];
   turn_in_list?: string[];
+  feed_back?: string;
 }
 interface Props {
   assignment: Assignment;

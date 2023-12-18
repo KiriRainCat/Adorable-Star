@@ -110,6 +110,7 @@ export default {
   titleEmpty: '标题不能为空',
   contentEmpty: '内容不能为空',
   mayRequireForcedDataRetrieval: '可能需要点击此按钮以强制获取作业提交状态',
+  feedback: '反馈',
   旧密码不匹配: '原密码不匹配',
   参数错误: '参数错误',
   参数不得为空: '参数不得为空',
