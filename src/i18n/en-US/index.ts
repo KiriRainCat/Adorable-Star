@@ -110,6 +110,7 @@ export default {
   titleEmpty: 'Title cannot be empty',
   contentEmpty: 'Content cannot be empty',
   mayRequireForcedDataRetrieval: 'You may need to click this button to forcibly retrieve the assignment submission status',
+  feedback: 'Feedback',
   旧密码不匹配: 'Old password does not match',
   参数错误: 'Parameter error',
   参数不得为空: 'Parameter cannot be empty',

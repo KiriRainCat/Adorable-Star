@@ -93,7 +93,7 @@
           <q-card-section v-if="assignment.feed_back != undefined">
             <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('feedback') }}:</div>
             <div class="max-sm:text-xs">{{ assignment.feed_back }}</div>
-            <!-- TODO: Add Momentum Image Fetch -->
+            <img :src="img" v-if="img !== ''" />
           </q-card-section>
 
           <q-card-section>
@@ -143,6 +143,8 @@ const $route = useRoute();
 const store = useAppStore();
 const { t } = useI18n();
 
+const img = ref('');
+
 const status = Number.parseInt(localStorage.getItem('status')!);
 
 const formatTime = (raw: string) => {
@@ -188,7 +190,15 @@ const fetchAssignment = (instant?: boolean) => {
 
   api
     .get(`/data/assignment/${$route.params['id']}`)
-    .then((res) => (assignment.value = res.data.data.data))
+    .then((res) => {
+      assignment.value = res.data.data.data;
+      if (res.data.data.data.feed_back != undefined) {
+        api
+          .get(`/data/feedback-img/${assignment.value.id}`, { responseType: 'blob' })
+          .then((res) => (res.data.size != 0 ? (img.value = window.URL.createObjectURL(res.data)) : null))
+          .catch(() => null);
+      }
+    })
     .catch(() => null);
 };
 
