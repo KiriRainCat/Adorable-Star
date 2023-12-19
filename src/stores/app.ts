@@ -81,23 +81,19 @@ export const useAppStore = defineStore('app', {
                   break;
                 case 'Due':
                   new window.Notification(`萌媛星 - ${t('assignment')}${t('due')}${t('changed')}`, {
-                    body: `${notification.course} [${notification.msg.split('|')[0]} → ${
-                      notification.msg.split('|')[1]
-                    }]`,
+                    body: `${notification.assignment} [${notification.msg.split('|')[1]} → ${notification.msg.split('|')[2]}]`,
                   });
                   break;
                 case 'Score':
                   new window.Notification(`萌媛星 - ${t('assignment')}${t('score')}${t('changed')}`, {
-                    body: `${notification.course} [ ${notification.msg.split('|')[0]} → ${
-                      notification.msg.split('|')[1]
-                    } ]`,
+                    body: `${notification.assignment} [ ${notification.msg.split('|')[1]} → ${notification.msg.split('|')[2]} ]`,
                   });
                   break;
               }
               break;
             case 2:
               new window.Notification(`萌媛星 - ${t('course')}${t('grade')}${t('changed')}`, {
-                body: `${notification.course} [${notification.msg.split('|')[0]} → ${notification.msg.split('|')[1]}]`,
+                body: `${notification.course} [${notification.msg.split('|')[1]} → ${notification.msg.split('|')[2]}]`,
               });
               break;
           }
