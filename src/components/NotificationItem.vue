@@ -35,10 +35,9 @@
               {{ $t('assignment') + $t('directions') + $t('changed') }}
             </q-item-label>
             <q-item-label v-else>
-              {{ $t(msg.split('|')[0].toLowerCase()) }}{{ $t('changed') }}: [ {{ msg.split('|')[1] }} →
-              {{ msg.split('|')[2] }} ]
+              {{ $t(msg.split('|')[0].toLowerCase()) }}{{ $t('changed') }}: [ {{ msg.split('|')[1] }} → {{ msg.split('|')[2] }} ]
             </q-item-label>
-            <q-item-label caption c>
+            <q-item-label caption>
               {{ $t('target') }}:
               {{ (assignment?.length || 0) > 32 ? assignment?.substring(0, 32) + '...' : assignment }}
             </q-item-label>
@@ -46,9 +45,7 @@
 
           <q-item-section v-if="type == 2">
             <q-item-label>{{ msg.split('|')[1] }}</q-item-label>
-            <q-item-label caption>
-              {{ $t('previousGrade') }}: {{ msg.split('|')[0] === ' ' ? 'None' : msg.split('|')[0] }}
-            </q-item-label>
+            <q-item-label caption>{{ $t('previousGrade') }}: {{ msg.split('|')[0] === ' ' ? 'None' : msg.split('|')[0] }}</q-item-label>
           </q-item-section>
         </span>
       </q-item>
@@ -94,17 +91,14 @@
               {{ $t('assignment') + $t('directions') + $t('changed') }}
             </q-item-label>
             <q-item-label v-else class="-mb-0.5">
-              {{ $t(msg.split('|')[0].toLowerCase()) }}{{ $t('changed') }}: [ {{ msg.split('|')[1] }} →
-              {{ msg.split('|')[2] }} ]
+              {{ $t(msg.split('|')[0].toLowerCase()) }}{{ $t('changed') }}: [ {{ msg.split('|')[1] }} → {{ msg.split('|')[2] }} ]
             </q-item-label>
             <q-item-label caption>{{ $t('target') }}: {{ assignment }}</q-item-label>
           </q-item-section>
 
           <q-item-section v-if="type == 2">
             <q-item-label class="-mb-0.5">{{ msg.split('|')[1] }}</q-item-label>
-            <q-item-label caption>
-              {{ $t('previousGrade') }}: {{ msg.split('|')[0] === ' ' ? 'None' : msg.split('|')[0] }}
-            </q-item-label>
+            <q-item-label caption>{{ $t('previousGrade') }}: {{ msg.split('|')[0] === ' ' ? 'None' : msg.split('|')[0] }}</q-item-label>
           </q-item-section>
         </div>
       </q-item>

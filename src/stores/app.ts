@@ -89,6 +89,11 @@ export const useAppStore = defineStore('app', {
                     body: `${notification.assignment} [ ${notification.msg.split('|')[1]} → ${notification.msg.split('|')[2]} ]`,
                   });
                   break;
+                case 'Feedback':
+                  new window.Notification(`萌媛星 - ${t('assignment')}${t('feedback')}${t('changed')}`, {
+                    body: `${notification.assignment} [ ${notification.msg.split('|')[1]} → ${notification.msg.split('|')[2]} ]`,
+                  });
+                  break;
               }
               break;
             case 2:

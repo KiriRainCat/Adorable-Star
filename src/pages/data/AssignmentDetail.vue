@@ -90,9 +90,9 @@
         </q-card-section>
 
         <q-scroll-area class="h-[72%]" :bar-style="{ width: '4px' }" :thumb-style="{ width: '4px' }">
-          <q-card-section v-if="assignment.feed_back != undefined">
+          <q-card-section v-if="assignment.feedback != undefined">
             <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('feedback') }}:</div>
-            <div class="max-sm:text-xs">{{ assignment.feed_back }}</div>
+            <div class="max-sm:text-xs">{{ assignment.feedback }}</div>
             <q-card class="w-96 mt-2 pt-3 p-1" v-if="img !== ''">
               <img :src="img" />
             </q-card>
@@ -194,7 +194,7 @@ const fetchAssignment = (instant?: boolean) => {
     .get(`/data/assignment/${$route.params['id']}`)
     .then((res) => {
       assignment.value = res.data.data.data;
-      if (res.data.data.data.feed_back != undefined) {
+      if (res.data.data.data.feedback != undefined) {
         api
           .get(`/data/feedback-img/${assignment.value.id}`, { responseType: 'blob' })
           .then((res) => (res.data.size != 0 ? (img.value = window.URL.createObjectURL(res.data)) : null))
