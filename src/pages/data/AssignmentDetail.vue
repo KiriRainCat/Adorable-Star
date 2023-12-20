@@ -93,7 +93,7 @@
           <q-card-section v-if="assignment.feed_back != undefined">
             <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('feedback') }}:</div>
             <div class="max-sm:text-xs">{{ assignment.feed_back }}</div>
-            <q-card class="w-1/4 mt-2 pt-3 p-1" v-if="img !== ''">
+            <q-card class="w-96 mt-2 pt-3 p-1" v-if="img !== ''">
               <img :src="img" />
             </q-card>
           </q-card-section>
