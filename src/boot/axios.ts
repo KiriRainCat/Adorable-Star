@@ -53,6 +53,7 @@ api.interceptors.response.use(
         router.replace('/auth/login');
         break;
       case 400:
+      case 429:
       case 500:
         Notify.create({
           type: 'negative',

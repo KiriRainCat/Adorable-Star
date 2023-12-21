@@ -124,4 +124,5 @@ export default {
   '验证码仍在5分钟有效期内 (没小于2分钟禁止重发)':
     'The verification code is still valid within a 5-minute period (no resend allowed when code still valid for more than 2 minutes)',
   提交失败: 'Submission failed, please retry',
+  '请求过于频繁，请稍后再试': 'Requests are too frequent. Please try again later',
 };
