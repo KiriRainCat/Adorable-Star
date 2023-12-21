@@ -183,6 +183,17 @@ const onNotificationClick = () => {
     return;
   }
 
+  if (props.type == -1 && props.msg.includes('proxy')) {
+    const dialog = $q.dialog({
+      title: '切换回代理浏览器？',
+      ok: true,
+      cancel: true,
+    });
+
+    dialog.onOk(() => api.post('/admin/switch-browser/0').catch(() => null));
+    return;
+  }
+
   if (props.assignment === undefined) {
     $router.push(`/data/course/${props.from}`);
   } else {
