@@ -33,6 +33,7 @@
       <div v-if="assignment.title != undefined" class="h-full">
         <q-card-section>
           <q-item-label caption class="sm:text-[0.9rem] font-semibold">{{ $t('due') }}: {{ formatTime(assignment.due) }}</q-item-label>
+          <q-item-label caption class="sm:text-[0.9rem] font-semibold">{{ $t('course') }}: {{ assignment.from }}</q-item-label>
         </q-card-section>
 
         <q-card-section class="flex">
