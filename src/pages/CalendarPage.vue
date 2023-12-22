@@ -47,7 +47,7 @@
         </div>
       </q-card>
       <div class="lg:w-[28rem] w-full mt-4 flex lg:flex-col lg:min-h-[47.7rem]">
-        <q-card class="card mr-4 mb-4 flex-1 min-h-[23.35rem]">
+        <q-card class="card mr-4 lg:mb-4 flex-1 min-h-[23.35rem]">
           <q-date
             minimal
             :key="key"
@@ -141,9 +141,7 @@ const setToNow = () => {
   }, 1);
 };
 const generateEventColor = (date: string): string => {
-  const incomplete = assignments.value.filter(
-    (val) => val.due.includes(date.replaceAll('/', '-')) && val.status == undefined
-  );
+  const incomplete = assignments.value.filter((val) => val.due.includes(date.replaceAll('/', '-')) && val.status == undefined);
   const complete = assignments.value.filter((val) => val.due.includes(date.replaceAll('/', '-')) && val.status == 1);
 
   if (incomplete.length == 0 && complete.length == 0) {
@@ -167,8 +165,7 @@ const assignments = ref<Assignment[]>([]);
 const filteredAssignments = ref<Assignment[][]>([[], []]);
 const filterAssignments = () => {
   filteredAssignments.value[0] = assignments.value.filter(
-    (val) =>
-      val.due.includes(selectedDate.value.replaceAll('/', '-')) && val.status == undefined && val.from != course.value
+    (val) => val.due.includes(selectedDate.value.replaceAll('/', '-')) && val.status == undefined && val.from != course.value
   );
   filteredAssignments.value[1] = assignments.value.filter(
     (val) => val.due.includes(selectedDate.value.replaceAll('/', '-')) && val.status == 1 && val.from != course.value
