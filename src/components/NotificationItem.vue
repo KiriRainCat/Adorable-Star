@@ -183,14 +183,19 @@ const onNotificationClick = () => {
     return;
   }
 
-  if (props.type == -1 && props.msg.includes('proxy')) {
+  if (props.type == -1 && props.msg.includes('browserProxyErr')) {
     const dialog = $q.dialog({
       title: '切换回代理浏览器？',
+      prompt: {
+        hint: '管理员验证',
+        model: '',
+        isValid: (val) => val.length > 6,
+      },
       ok: true,
       cancel: true,
     });
 
-    dialog.onOk(() => api.post('/admin/switch-browser/0').catch(() => null));
+    dialog.onOk((payload) => api.post('/admin/switch-browser/0', {}, { headers: { Admin: payload } }).catch(() => null));
     return;
   }
 
