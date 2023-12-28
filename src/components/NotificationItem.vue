@@ -34,6 +34,9 @@
             <q-item-label v-if="msg.split('|')[0] === 'Desc'">
               {{ $t('assignment') + $t('directions') + $t('changed') }}
             </q-item-label>
+            <q-item-label v-else-if="msg.split('|')[0] === 'TurnInAble'">
+              {{ $t('assignment') + $t('turnInState') + $t('changed') }}
+            </q-item-label>
             <q-item-label v-else>
               {{ $t(msg.split('|')[0].toLowerCase()) }}{{ $t('changed') }}: [ {{ msg.split('|')[1] }} → {{ msg.split('|')[2] }} ]
             </q-item-label>
