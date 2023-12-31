@@ -3,11 +3,7 @@
     <q-card class="bg-[rgba(255,255,255,0.65)] w-[28rem] h-[42rem] rounded-xl">
       <q-form class="px-12 py-8 text-center mt-[2.4rem]" @submit="register">
         <div class="text-3xl mb-8 font-semibold">{{ $t('registerDesc') }}</div>
-        <q-input
-          v-model="email"
-          :label="$t('email')"
-          :rules="[(val) => (val !== '' && val !== null) || `${$t('noEmptyField')}`]"
-        />
+        <q-input v-model="email" :label="$t('email')" :rules="[(val) => (val !== '' && val !== null) || `${$t('noEmptyField')}`]" />
         <div class="flex items-center">
           <q-input
             class="flex-1"
@@ -27,11 +23,7 @@
             {{ cd == 0 ? $t('send') : cd + 's' }}
           </q-btn>
         </div>
-        <q-input
-          v-model="username"
-          :label="$t('username')"
-          :rules="[(val) => (val !== '' && val !== null) || `${$t('noEmptyField')}`]"
-        />
+        <q-input v-model="username" :label="$t('username')" :rules="[(val) => (val !== '' && val !== null) || `${$t('noEmptyField')}`]" />
         <q-input
           v-model="password"
           :type="isPwd ? 'password' : 'text'"

@@ -6,9 +6,7 @@
           <q-item-label class="sm:text-xl font-bold">
             {{ course.title }}
           </q-item-label>
-          <q-item-label caption class="sm:text-[1rem] font-semibold">
-            {{ course.percent_grade }} {{ course.letter_grade }}
-          </q-item-label>
+          <q-item-label caption class="sm:text-[1rem] font-semibold">{{ course.percent_grade }} {{ course.letter_grade }}</q-item-label>
         </div>
 
         <div class="absolute top-2 right-2 flex max-sm:flex-col-reverse">

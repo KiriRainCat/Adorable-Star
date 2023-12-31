@@ -3,11 +3,7 @@
     <q-card class="glass bg-[rgba(255,255,255,0.6)] w-[28rem] h-[30rem] rounded-xl">
       <q-form @submit="onSubmit" greedy class="px-12 py-8 text-center mt-[4.5rem]">
         <div class="text-3xl mb-8 font-semibold">{{ $t('completeJupiterInfo') }}</div>
-        <q-input
-          v-model="name"
-          :label="$t('usernameOrId')"
-          :rules="[(val) => (val !== '' && val !== null) || `${$t('noEmptyField')}`]"
-        />
+        <q-input v-model="name" :label="$t('usernameOrId')" :rules="[(val) => (val !== '' && val !== null) || `${$t('noEmptyField')}`]" />
         <q-input
           v-model="password"
           type="password"
