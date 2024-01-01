@@ -6,7 +6,7 @@ import { router } from 'src/router';
 
 // Create global axios instance
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: 'https://adorable-star.kiriraincat.eu.org/api',
   headers: {
     Authorization: 'dvgZgggolxESd0m',
   },
