@@ -198,7 +198,12 @@ const onNotificationClick = () => {
       cancel: true,
     });
 
-    dialog.onOk((payload) => api.post('/admin/switch-browser/0', {}, { headers: { Admin: payload } }).catch(() => null));
+    dialog.onOk((payload) =>
+      api
+        .post('/admin/switch-browser/1', {}, { headers: { Admin: payload } })
+        .then(() => $q.notify({ type: 'positive', message: '切换成功' }))
+        .catch(() => null)
+    );
     return;
   }
 
