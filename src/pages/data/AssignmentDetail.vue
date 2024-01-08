@@ -106,10 +106,13 @@
 
           <q-card-section v-if="assignment.turn_in_able != -1">
             <div class="sm:text-lg font-bold whitespace-pre-wrap">{{ $t('uploaded') }}:</div>
-            <q-card v-if="assignment.turn_in_list?.length == 0 && assignment.turn_in_able" class="max-w-md mt-2 p-2">
+            <q-card
+              v-if="(assignment.turn_in_list == undefined || assignment.turn_in_list?.length == 0) && assignment.turn_in_able"
+              class="max-w-md mt-2 p-2"
+            >
               {{ $t('none') }}
             </q-card>
-            <q-card v-if="assignment.turn_in_list?.length == undefined && assignment.turn_in_able == undefined" class="max-w-md mt-2 p-2">
+            <q-card v-if="assignment.turn_in_able == undefined" class="max-w-md mt-2 p-2">
               <q-btn flat noCaps icon="sync_problem" @click="() => onFetchDetail(true)" class="max-sm:p-2 max-sm:text-[0.6rem]">
                 {{ $t('mayRequireForcedDataRetrieval') }}
               </q-btn>
