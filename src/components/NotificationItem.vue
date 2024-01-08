@@ -136,7 +136,8 @@ const props = defineProps<Notification>();
 const emit = defineEmits(['delete']);
 
 const formatTime = (raw: string) => {
-  return `${raw.substring(5, 7)}/${raw.substring(8, 10)} ` + `${raw.substring(11, 13)}:${raw.substring(14, 16)}`;
+  const date = new Date(Date.parse(raw)).toLocaleString();
+  return `${date.substring(5, date.length - 3)}`;
 };
 
 const onDeleteMsg = () => {
