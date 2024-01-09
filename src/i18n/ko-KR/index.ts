@@ -112,6 +112,7 @@ export default {
   mayRequireForcedDataRetrieval: '과제 제출 상태를 강제로 확인하기 위해 이 버튼을 클릭해야 할 수 있습니다',
   feedback: '피드백',
   turnInState: '제출 상태',
+  longTimeNoSee: '24시간 이상 로그인하지 않음 (최신 데이터 초기화)',
   旧密码不匹配: '이전 비밀번호가 일치하지 않습니다',
   参数错误: '매개변수 오류',
   参数不得为空: '매개변수는 비워 둘 수 없습니다',

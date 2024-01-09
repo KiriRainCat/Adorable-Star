@@ -61,7 +61,17 @@ const onSubmit = () => {
       localStorage.setItem('token', res.data.data.split('|')[0]);
       localStorage.setItem('status', res.data.data.split('|')[1]);
       if (res.data.data.split('|')[2] === 'true') {
-        api.post('/data/assignment/fetch').catch(() => null);
+        $q.notify({
+          type: 'positive',
+          message: t('longTimeNoSee'),
+        });
+        $q.loading.show();
+
+        api
+          .post('/data/assignment/fetch')
+          .then(() => $q.notify({ type: 'positive', message: t('fetchSuccess') }))
+          .catch(() => null)
+          .finally(() => $q.loading.hide());
       }
 
       $q.notify({
