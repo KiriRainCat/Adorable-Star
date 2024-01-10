@@ -98,7 +98,7 @@ export const useAppStore = defineStore('app', {
               break;
             case 2:
               new window.Notification(`萌媛星 - ${t('course')}${t('grade')}${t('changed')}`, {
-                body: `${notification.course} [${notification.msg.split('|')[1]} → ${notification.msg.split('|')[2]}]`,
+                body: `${notification.course} [${notification.msg.split('|')[0]} → ${notification.msg.split('|')[1]}]`,
               });
               break;
           }
