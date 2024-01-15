@@ -40,9 +40,10 @@
             <q-item-label v-else>
               {{ $t(msg.split('|')[0].toLowerCase()) }}{{ $t('changed') }}: [ {{ msg.split('|')[1] }} → {{ msg.split('|')[2] }} ]
             </q-item-label>
+            <q-tooltip v-if="assignment!.length > 28">{{ assignment }}</q-tooltip>
             <q-item-label caption>
               {{ $t('target') }}:
-              {{ (assignment?.length || 0) > 32 ? assignment?.substring(0, 32) + '...' : assignment }}
+              {{ (assignment?.length || 0) > 28 ? assignment?.substring(0, 28) + '...' : assignment }}
             </q-item-label>
           </q-item-section>
 
