@@ -81,7 +81,7 @@ const onSubmit = () => {
         $q.loading.show();
 
         api
-          .post('/data/assignment/fetch')
+          .post('/data/fetch')
           .then(() => $q.notify({ type: 'positive', message: t('fetchSuccess') }))
           .catch(() => null)
           .finally(() => $q.loading.hide());
