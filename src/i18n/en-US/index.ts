@@ -112,7 +112,7 @@ export default {
   mayRequireForcedDataRetrieval: 'You may need to click this button to forcibly retrieve the assignment submission status',
   feedback: 'Feedback',
   turnInState: 'Submission Status',
-  longTimeNoSee: 'Not logged in for more than 24 hours (initializing the latest data)',
+  longTimeNoSee: 'Not logged in for more than 24 hours (initializing newest data)',
   旧密码不匹配: 'Old password does not match',
   参数错误: 'Parameter error',
   参数不得为空: 'Parameter cannot be empty',
