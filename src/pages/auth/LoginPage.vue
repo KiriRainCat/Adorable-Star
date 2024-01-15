@@ -60,6 +60,19 @@ const onSubmit = () => {
     .then((res) => {
       localStorage.setItem('token', res.data.data.split('|')[0]);
       localStorage.setItem('status', res.data.data.split('|')[1]);
+
+      $q.notify({
+        type: 'positive',
+        message: t('loginSuccess'),
+      });
+      $router.replace('/index');
+
+      const store = useAppStore();
+      api
+        .get('/data/message')
+        .then((res) => store.updateNotifications(res.data.data.data))
+        .catch(() => null);
+
       if (res.data.data.split('|')[2] === 'true') {
         $q.notify({
           type: 'positive',
@@ -73,18 +86,6 @@ const onSubmit = () => {
           .catch(() => null)
           .finally(() => $q.loading.hide());
       }
-
-      $q.notify({
-        type: 'positive',
-        message: t('loginSuccess'),
-      });
-      $router.replace('/index');
-
-      const store = useAppStore();
-      api
-        .get('/data/message')
-        .then((res) => store.updateNotifications(res.data.data.data))
-        .catch(() => null);
     })
     .catch((e) => {
       if (e.response.data.code == 428) {
