@@ -73,12 +73,14 @@ const onSubmit = () => {
         .then((res) => store.updateNotifications(res.data.data.data))
         .catch(() => null);
 
+      // 用户长时间未登录的数据大更新
       if (res.data.data.split('|')[2] === 'true') {
         $q.notify({
           type: 'positive',
+          timeout: 10000,
           message: t('longTimeNoSee'),
         });
-        $q.loading.show();
+        $q.loading.show({ message: t('longTimeNoSee') });
 
         api
           .post('/data/fetch')
