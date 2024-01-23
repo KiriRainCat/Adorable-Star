@@ -5,8 +5,9 @@ import { i18n } from './i18n';
 import { router } from 'src/router';
 
 // Create global axios instance
+const host = window.location.hostname;
 const api = axios.create({
-  baseURL: 'https://adorable-star.kiriraincat.eu.org/api',
+  baseURL: `https://${host === 'localhost' ? 'adorable-star.kiriraincat.eu.org' : host}/api`,
   headers: {
     Authorization: 'dvgZgggolxESd0m',
   },
