@@ -113,6 +113,7 @@ export default {
   feedback: '反馈',
   turnInState: '提交状态',
   longTimeNoSee: '超过24小时未登录 (初始化新数据中)',
+  todoList: '代办列表',
   旧密码不匹配: '原密码不匹配',
   参数错误: '参数错误',
   参数不得为空: '参数不得为空',
